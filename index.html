@@ -19,7 +19,7 @@
             --white: #ffffff;
             --text-main: #2c2c2c; /* Dark text for contrast against cream */
             --text-muted: #555555;
-            --accent: #bd7efa; /* Fluno Brand Color */
+            --accent: #fd9651; /* Fluno Brand Color */
             --border: #e0e0e0;
             --card-bg: #ffffff;
             --transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -333,6 +333,95 @@
             h1 { font-size: 3.5rem; }
             .logo-grid { gap: 1rem; }
         }
+        /* ============================ MOBILE OPTIMIZATION ============================ */
+@media (max-width: 768px) {
+
+  nav {
+    padding: 1rem 1.5rem;
+  }
+
+  .nav-logo {
+    font-size: 1.2rem;
+  }
+
+  .nav-link {
+    font-size: 0.7rem;
+  }
+
+  section {
+    padding: 4rem 0;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  #hero {
+    height: auto;
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+  }
+
+  #hero .btn {
+    display: block;
+    margin: 0.8rem auto;
+    width: 80%;
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 1.8rem;
+  }
+
+  .img-portrait {
+    aspect-ratio: 1/1;
+  }
+
+  .logo-grid {
+    gap: 1rem;
+  }
+
+  .platform-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .coming-soon-card h4 {
+    font-size: 1.3rem;
+  }
+
+  #competition div[style*="display: flex"] {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  #competition div[style*="position: absolute"] {
+    display: none;
+  }
+
+  .timeline {
+    padding-left: 1rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
+  }
+
+}
+
 
     </style>
 </head>
@@ -362,7 +451,7 @@
         <div class="container reveal">
             <span class="subtitle">Our Vision</span>
             <p class="vision-text mx-auto" style="font-family: 'Playfair Display', serif; font-size: 1.8rem; line-height: 1.5; color: var(--text-main); max-width: 800px;">
-                “Fluno is a brand built to redefine modern skincare and hygiene for the new generation. It is not about one product, but about building a trustworthy, design-first brand that feels relevant, transparent, and modern. In a market full of conventional and forgettable brands, Fluno focuses on creating a clean, honest, and engaging experience that fits today’s lifestyle. Our goal is to build a long-term brand that people don’t just use, but actually trust and come back to.”
+                “Fluno is a brand built to redefine modern skincare and hygiene for the new generation. It is not about one product, but about building a trustworthy brand that feels relevant, transparent, and modern. In a market full of conventional and forgettable brands, Fluno focuses on creating a clean, honest, and engaging experience that fits today’s lifestyle. Our goal is to build a long-term brand that people don’t just use, but actually trust and come back to.”
             </p>
         </div>
     </section>
@@ -397,7 +486,7 @@
             <h2 class="serif" style="text-align: center;">Simplicity Wins</h2>
             <div style="display: flex; flex-direction: column; align-items: center;">
                 <p style="font-size: 1.5rem; color: var(--text-main); font-weight: 500; text-align: center;">
-                    Consumers don’t want more options.<br>They want <span style="border-bottom: 2px solid var(--text-main);">one brand</span> they can trust daily.
+                    Consumers don’t want more options.<br>They want<span style="border-bottom: 2px solid var(--text-main);"> A brand engages with them.</span>.
                 </p>
             </div>
         </div>
@@ -486,10 +575,10 @@
     <div class="grid grid-3">
       <div class="card">
         <h3>Urban Youth</h3>
-        <p>18–35 year olds seeking clean, aesthetic, trustworthy brands.</p>
+        <p>18–35 year olds seeking clean, aesthetic, Exiting brands.</p>
       </div>
       <div class="card">
-        <h3>Working Professionals</h3>
+        <h3>Working Professionals</h3> ah
         <p>Daily-use hygiene customers focused on routine care.</p>
       </div>
       <div class="card">
@@ -506,7 +595,7 @@
     <h2>Market Opportunity</h2>
     <p class="mx-auto text-center">
       India’s personal care market is growing rapidly with increasing demand for
-      mid-premium, clean, design-first hygiene brands.
+      mid-premium brands.
     </p>
     <div class="grid grid-3">
       <div class="card">
@@ -590,7 +679,7 @@
                 
                 <div style="background: white; color: black; padding: 2rem 3rem; z-index: 2; border: 1px solid white;">
                     <strong style="font-family: 'Quicksand'; font-size: 1.5rem; font-weight: 700;">FLUNO</strong>
-                    <br><span style="font-size: 0.8rem;">Mid-Premium, High Trust</span>
+                    <br><span style="font-size: 0.8rem;">Mid-Premium</span>
                 </div>
 
                 <div style="background: #333; padding: 1rem 2rem; z-index: 1;">Luxury<br><span style="font-size: 0.8rem; color: #888;">Expensive</span></div>
