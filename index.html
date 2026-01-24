@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
         /* ============================
@@ -18,7 +18,7 @@
             --white: #ffffff;
             --text-main: #1a1a1a;
             --text-muted: #666666;
-            --accent: #bd7efa; /* FLUNO PURPLE */
+            --accent: #2c2c2c;
             --border: #e0e0e0;
             --card-bg: #ffffff;
             --transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -146,28 +146,6 @@
             color: var(--white);
         }
 
-        /* Platform Link Buttons */
-        .btn-platform {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem 2rem;
-            background: white;
-            border: 1px solid #ddd;
-            color: var(--text-main);
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s ease;
-            min-width: 150px;
-        }
-        .btn-platform:hover {
-            background: var(--text-main);
-            color: white;
-            border-color: var(--text-main);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
         /* Cards */
         .card {
             background: var(--card-bg);
@@ -199,7 +177,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.9;
+            opacity: 0.8;
             transition: transform 1.5s ease;
         }
 
@@ -217,18 +195,15 @@
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            transition: background 0.3s;
+            mix-blend-mode: difference;
+            color: white;
         }
 
-        /* BRAND LOGO STYLE */
         .logo {
-            font-family: 'Quicksand', sans-serif;
-            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--accent); /* #bd7efa */
-            text-transform: lowercase;
-            text-decoration: none;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            letter-spacing: -0.03em;
         }
 
         /* ============================
@@ -265,20 +240,14 @@
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: #dcdcdc; 
+            background: #dcdcdc; /* Placeholder for image */
         }
         
-        .hero-bg::after {
-            content: '';
-            position: absolute;
-            top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.4); /* Dark overlay to make logo & text pop */
-        }
-
         .hero-bg img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            filter: brightness(0.85); /* Darken slightly for text readability */
         }
 
         /* Vision */
@@ -303,7 +272,7 @@
         }
         .bar-fill {
             height: 100%;
-            background: var(--accent); /* Use brand color for data */
+            background: var(--text-main);
             width: 0;
             transition: width 1.5s ease-out;
         }
@@ -332,7 +301,7 @@
             font-size: 0.85rem;
             font-weight: 600;
         }
-        .growth-bar:hover { background: var(--accent); color: white; }
+        .growth-bar:hover { background: var(--text-main); }
 
         /* Timeline */
         .timeline {
@@ -351,18 +320,24 @@
             top: 5px;
             width: 10px;
             height: 10px;
-            background: var(--accent);
+            background: var(--text-main);
             border-radius: 50%;
         }
 
         /* Presence Icons */
         .logo-grid {
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
             flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 3rem;
+            opacity: 0.6;
         }
-        
+        .logo-placeholder {
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: -0.05em;
+        }
+
         /* Contact Form */
         input, textarea {
             width: 100%;
@@ -377,14 +352,7 @@
             transition: border 0.3s;
         }
         input:focus, textarea:focus {
-            border-bottom-color: var(--accent);
-        }
-
-        /* Media Queries */
-        @media (max-width: 768px) {
-            nav { padding: 1.5rem; }
-            h1 { font-size: 3rem; }
-            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            border-bottom-color: var(--text-main);
         }
 
     </style>
@@ -392,12 +360,8 @@
 <body>
 
     <nav class="reveal">
-        <a href="#" class="logo">fluno.</a>
-        
-        <div style="display: flex; gap: 20px; align-items: center;">
-            <a href="https://myfluno.wixsite.com/fluno-1" target="_blank" style="color: white; text-decoration: none; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1em; border-bottom: 1px solid rgba(255,255,255,0.5);">Visit Store</a>
-            <a href="#contact" style="color: white; text-decoration: none; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1em;">Contact</a>
-        </div>
+        <div class="logo">FLUNO.</div>
+        <a href="#contact" style="color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em;">Contact</a>
     </nav>
 
     <section id="hero">
@@ -409,8 +373,8 @@
             <h1 style="color: white; margin-bottom: 1rem;">Care Every Drop</h1>
             <p style="color: rgba(255,255,255,0.9); font-size: 1.25rem;">The modern, trustworthy, mid-premium daily-use hygiene brand.</p>
             <div style="margin-top: 2rem;">
-                <a href="https://myfluno.wixsite.com/fluno-1" target="_blank" class="btn" style="border-color: #bd7efa; background: #bd7efa; color: white; margin-right: 1rem; border:none;">Visit Website</a>
-                <a href="#vision" class="btn" style="border-color: white; color: white;">View Pitch</a>
+                <a href="#vision" class="btn" style="border-color: white; color: white; margin-right: 1rem;">View Pitch</a>
+                <a href="#contact" class="btn" style="background: white; color: black; border-color: white;">Contact</a>
             </div>
         </div>
     </section>
@@ -453,7 +417,7 @@
         <div class="container reveal">
             <h2 class="serif">The Insight</h2>
             <p style="font-size: 1.5rem; color: var(--text-main); font-weight: 500;">
-                Consumers don’t want more options.<br>They want <span style="border-bottom: 2px solid var(--accent);">one brand</span> they can trust daily.
+                Consumers don’t want more options.<br>They want <span style="border-bottom: 2px solid var(--text-main);">one brand</span> they can trust daily.
             </p>
         </div>
     </section>
@@ -462,7 +426,7 @@
         <div class="container">
             <div class="grid grid-2">
                 <div class="img-placeholder img-portrait reveal">
-                    <img src="fluno care.png" alt="Product Mockup">
+                    <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1887&auto=format&fit=crop" alt="Product Mockup">
                 </div>
                 <div style="display: flex; flex-direction: column; justify-content: center;" class="reveal">
                     <span class="subtitle">The Solution</span>
@@ -489,19 +453,19 @@
             <h2 class="text-center reveal">Why We Win</h2>
             <div class="grid grid-4 reveal" style="margin-top: 3rem;">
                 <div class="text-center">
-                    <h4 style="font-size: 3rem; margin-bottom: 0.5rem; color: var(--accent);">01</h4>
+                    <h4 style="font-size: 3rem; margin-bottom: 0.5rem;">01</h4>
                     <p>Clear mid-premium positioning</p>
                 </div>
                 <div class="text-center">
-                    <h4 style="font-size: 3rem; margin-bottom: 0.5rem; color: var(--accent);">02</h4>
+                    <h4 style="font-size: 3rem; margin-bottom: 0.5rem;">02</h4>
                     <p>Strong design & brand consistency</p>
                 </div>
                 <div class="text-center">
-                    <h4 style="font-size: 3rem; margin-bottom: 0.5rem; color: var(--accent);">03</h4>
+                    <h4 style="font-size: 3rem; margin-bottom: 0.5rem;">03</h4>
                     <p>Focus on repeat-use categories</p>
                 </div>
                 <div class="text-center">
-                    <h4 style="font-size: 3rem; margin-bottom: 0.5rem; color: var(--accent);">04</h4>
+                    <h4 style="font-size: 3rem; margin-bottom: 0.5rem;">04</h4>
                     <p>Fast SKU expansion + distribution</p>
                 </div>
             </div>
@@ -583,7 +547,7 @@
                 <div style="background: #333; padding: 1rem 2rem; z-index: 1;">Cheap Mass<br><span style="font-size: 0.8rem; color: #888;">Generic, Low Trust</span></div>
                 
                 <div style="background: white; color: black; padding: 2rem 3rem; z-index: 2; border: 1px solid white;">
-                    <strong style="font-family: 'Quicksand', sans-serif; font-weight: 700; color: #bd7efa; font-size: 1.5rem;">fluno</strong>
+                    <strong style="font-family: 'Playfair Display'; font-size: 1.5rem;">FLUNO</strong>
                     <br><span style="font-size: 0.8rem;">Mid-Premium, Design-First, High Trust</span>
                 </div>
 
@@ -653,10 +617,10 @@
             <span class="subtitle">Leadership</span>
             <h2>The Founder</h2>
             <div style="max-width: 400px; margin: 2rem auto;">
-                <div class="img-placeholder img-portrait" style="margin-bottom: 1.5rem; background: #eee;">
-                    <img src="WhatsApp Image 2026-01-24 at 9.12.06 PM (1).jpeg" alt="Pendkar Sai Varun">
+                <div class="img-placeholder img-portrait" style="margin-bottom: 1.5rem;">
+                    <img src="https://placehold.co/600x800/dcdcdc/666666?text=Founder+Image" alt="Founder">
                 </div>
-                <h3 style="margin-bottom: 0.5rem;">Pendkar Sai Varun</h3>
+                <h3 style="margin-bottom: 0.5rem;">Founder Name</h3>
                 <span style="display: block; color: var(--text-muted); margin-bottom: 1rem;">Founder & Brand Builder</span>
             </div>
         </div>
@@ -691,13 +655,11 @@
     <section id="presence">
         <div class="container text-center reveal">
             <span class="subtitle">Presence & Platforms</span>
-            <p style="margin-bottom: 2rem;">Click below to visit us on our platforms.</p>
             <div class="logo-grid" style="margin-top: 2rem;">
-                <a href="https://amzn.in/d/436Q96D" target="_blank" class="btn-platform">Amazon</a>
-                <a href="https://blinkit.com/prn/x/prid/712269" target="_blank" class="btn-platform" style="background:#f8cb00; border:none; color:black;">Blinkit</a>
-                <a href="https://www.instagram.com/myfluno?igsh=MWljZXR2MzZ4and4OA==" target="_blank" class="btn-platform">Instagram</a>
-                <a href="https://www.indiamart.com/proddetail/fluno-handwash-2857594123297.html?srsltid=AfmBOopkfhFT41chRpGg770haxaf1DlnpAwLoF9IqHsn7w0BmC-17mvN" target="_blank" class="btn-platform">IndiaMART</a>
-                <a href="https://myfluno.wixsite.com/fluno-1" target="_blank" class="btn-platform" style="background:var(--accent); border:none; color:white;">Website</a>
+                <div class="logo-placeholder">Amazon</div>
+                <div class="logo-placeholder">Blinkit</div>
+                <div class="logo-placeholder">Instagram</div>
+                <div class="logo-placeholder">IndiaMART</div>
             </div>
         </div>
     </section>
@@ -708,13 +670,9 @@
                 <div>
                     <h2>Let's Build Together.</h2>
                     <p>Get in touch for investment inquiries or partnership opportunities.</p>
-                    
                     <div style="margin-top: 2rem;">
-                        <span class="subtitle">Email</span>
-                        <a href="mailto:pendkarsaivarun@gmail.com" style="color: var(--text-main); font-size: 1.1rem; text-decoration:none; display:block; margin-bottom: 1.5rem;">pendkarsaivarun@gmail.com</a>
-                        
-                        <span class="subtitle">Phone / WhatsApp</span>
-                        <a href="tel:+918309732876" style="color: var(--text-main); font-size: 1.1rem; text-decoration:none;">+91 83097 32876</a>
+                        <strong>Email:</strong><br>
+                        <a href="mailto:founder@fluno.com" style="color: var(--text-main); font-size: 1.2rem;">founder@fluno.com</a>
                     </div>
                 </div>
                 <div>
@@ -730,7 +688,7 @@
     </section>
 
     <footer style="padding: 2rem 0; text-align: center; border-top: 1px solid #eee; font-size: 0.8rem; color: #999;">
-        <p>&copy; 2026 Fluno. All Rights Reserved.</p>
+        <p>&copy; 2024 Fluno. All Rights Reserved.</p>
     </footer>
 
     <script>
