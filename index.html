@@ -333,95 +333,7 @@
             h1 { font-size: 3.5rem; }
             .logo-grid { gap: 1rem; }
         }
-        /* ============================ MOBILE OPTIMIZATION ============================ */
-@media (max-width: 768px) {
-
-  nav {
-    padding: 1rem 1.5rem;
-  }
-
-  .nav-logo {
-    font-size: 1.2rem;
-  }
-
-  .nav-link {
-    font-size: 0.7rem;
-  }
-
-  section {
-    padding: 4rem 0;
-  }
-
-  h1 {
-    font-size: clamp(2.5rem, 8vw, 3.5rem);
-  }
-
-  h2 {
-    font-size: 1.8rem;
-  }
-
-  p {
-    font-size: 1rem;
-  }
-
-  #hero {
-    height: auto;
-    padding-top: 6rem;
-    padding-bottom: 4rem;
-  }
-
-  #hero .btn {
-    display: block;
-    margin: 0.8rem auto;
-    width: 80%;
-  }
-
-  .grid-2,
-  .grid-3,
-  .grid-4 {
-    grid-template-columns: 1fr;
-  }
-
-  .card {
-    padding: 1.8rem;
-  }
-
-  .img-portrait {
-    aspect-ratio: 1/1;
-  }
-
-  .logo-grid {
-    gap: 1rem;
-  }
-
-  .platform-btn {
-    width: 100%;
-    text-align: center;
-  }
-
-  .coming-soon-card h4 {
-    font-size: 1.3rem;
-  }
-
-  #competition div[style*="display: flex"] {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  #competition div[style*="position: absolute"] {
-    display: none;
-  }
-
-  .timeline {
-    padding-left: 1rem;
-  }
-
-  footer {
-    font-size: 0.8rem;
-  }
-
-}
-
+        
 
     </style>
 </head>
@@ -838,6 +750,55 @@
         document.querySelectorAll('.reveal').forEach(el => {
             observer.observe(el);
         });
+      
+/* ================= MOBILE OPTIMIZATION JS ================= */
+
+// Fix mobile viewport height issue (100vh bug)
+function fixMobileVH() {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+fixMobileVH();
+window.addEventListener('resize', fixMobileVH);
+
+// Improve tap responsiveness
+document.addEventListener('touchstart', function(){}, {passive:true});
+
+// Disable double-tap zoom on buttons
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+  let now = (new Date()).getTime();
+  if (now - lastTouchEnd <= 300) {
+    event.preventDefault();
+  }
+  lastTouchEnd = now;
+}, false);
+
+// Smooth anchor scrolling for mobile
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href'))
+      .scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Add mobile active feedback
+document.querySelectorAll('.btn, .platform-btn').forEach(btn => {
+  btn.addEventListener('touchstart', () => {
+    btn.style.transform = 'scale(0.96)';
+  });
+  btn.addEventListener('touchend', () => {
+    btn.style.transform = '';
+  });
+});
+
+// Lazy-load images on mobile
+document.querySelectorAll('img').forEach(img => {
+  img.setAttribute('loading', 'lazy');
+});
+
+
     </script>
 </body>
 </html>
