@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluno | Care Every Drop</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================
+           VARIABLES & RESET
+           ============================ */
+        :root {
+            --bg-color: #f9f9f7; /* Soft Alabaster */
+            --white: #ffffff;
+            --text-main: #1a1a1a;
+            --text-muted: #666666;
+            --accent: #2c2c2c;
+            --border: #e0e0e0;
+            --card-bg: #ffffff;
+            --transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============================
+           TYPOGRAPHY
+           ============================ */
+        h1, h2, h3, h4, .serif {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            max-width: 60ch;
+        }
+
+        .subtitle {
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+            color: var(--text-muted);
+        }
+
+        /* ============================
+           UTILITIES & LAYOUT
+           ============================ */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+        .text-center { text-align: center; }
+        .flex-center { display: flex; align-items: center; justify-content: center; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+
+        /* ============================
+           COMPONENTS
+           ============================ */
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--text-main);
+            background: transparent;
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--text-main);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background: var(--text-main);
+            color: var(--white);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        /* Images */
+        .img-placeholder {
+            width: 100%;
+            height: 100%;
+            background-color: #e5e5e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .img-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: transform 1.5s ease;
+        }
+
+        .img-portrait { aspect-ratio: 3/4; }
+        .img-landscape { aspect-ratio: 16/9; }
+        
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            mix-blend-mode: difference;
+            color: white;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+
+        /* ============================
+           ANIMATIONS
+           ============================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================
+           SECTIONS SPECIFIC
+           ============================ */
+        
+        /* Hero */
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: #dcdcdc; /* Placeholder for image */
+        }
+        
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.85); /* Darken slightly for text readability */
+        }
+
+        /* Vision */
+        #vision p.vision-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            line-height: 1.5;
+            color: var(--text-main);
+            max-width: 800px;
+        }
+
+        /* Market Opportunity Charts */
+        .chart-row {
+            margin-bottom: 1.5rem;
+        }
+        .bar-container {
+            width: 100%;
+            height: 4px;
+            background: #eee;
+            margin-top: 10px;
+            position: relative;
+        }
+        .bar-fill {
+            height: 100%;
+            background: var(--text-main);
+            width: 0;
+            transition: width 1.5s ease-out;
+        }
+        
+        .market-growth-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 20px;
+            height: 200px;
+            margin-top: 40px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .growth-bar {
+            flex: 1;
+            background: #d4d4d4;
+            transition: height 1.5s ease;
+            position: relative;
+            height: 0;
+        }
+        .growth-bar span {
+            position: absolute;
+            top: -25px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .growth-bar:hover { background: var(--text-main); }
+
+        /* Timeline */
+        .timeline {
+            border-left: 1px solid var(--border);
+            padding-left: 2rem;
+            margin-left: 1rem;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: var(--text-main);
+            border-radius: 50%;
+        }
+
+        /* Presence Icons */
+        .logo-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 3rem;
+            opacity: 0.6;
+        }
+        .logo-placeholder {
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: -0.05em;
+        }
+
+        /* Contact Form */
+        input, textarea {
+            width: 100%;
+            padding: 1rem 0;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            outline: none;
+            transition: border 0.3s;
+        }
+        input:focus, textarea:focus {
+            border-bottom-color: var(--text-main);
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="reveal">
+        <div class="logo">FLUNO.</div>
+        <a href="#contact" style="color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em;">Contact</a>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1556228720-191507f300c6?q=80&w=2574&auto=format&fit=crop" alt="Abstract Clean Texture">
+        </div>
+        <div class="container reveal">
+            <span class="subtitle" style="color: rgba(255,255,255,0.8);">Brand Positioning</span>
+            <h1 style="color: white; margin-bottom: 1rem;">Care Every Drop</h1>
+            <p style="color: rgba(255,255,255,0.9); font-size: 1.25rem;">The modern, trustworthy, mid-premium daily-use hygiene brand.</p>
+            <div style="margin-top: 2rem;">
+                <a href="#vision" class="btn" style="border-color: white; color: white; margin-right: 1rem;">View Pitch</a>
+                <a href="#contact" class="btn" style="background: white; color: black; border-color: white;">Contact</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="vision" class="text-center">
+        <div class="container reveal">
+            <span class="subtitle">Our Vision</span>
+            <p class="vision-text mx-auto">
+                “Fluno is a brand built to redefine modern skincare and hygiene for the new generation. It is not about one product, but about building a trustworthy, design-first brand that feels relevant, transparent, and modern. In a market full of conventional and forgettable brands, Fluno focuses on creating a clean, honest, and engaging experience that fits today’s lifestyle. Our goal is to build a long-term brand that people don’t just use, but actually trust and come back to.”
+            </p>
+        </div>
+    </section>
+
+    <section id="problem" style="background: white;">
+        <div class="container">
+            <div class="grid grid-2">
+                <div class="reveal">
+                    <h2>The Problem</h2>
+                    <p>The hygiene market is polarized and outdated.</p>
+                </div>
+                <div class="grid grid-2 reveal">
+                    <div class="card">
+                        <h3>Low Trust</h3>
+                        <p style="font-size: 0.9rem;">Market full of generic, fragrance-led, low-trust brands with questionable ingredients.</p>
+                    </div>
+                    <div class="card">
+                        <h3>The Gap</h3>
+                        <p style="font-size: 0.9rem;">Huge gap between cheap mass-market products and overpriced premium luxury.</p>
+                    </div>
+                    <div class="card" style="grid-column: span 2;">
+                        <h3>No Connection</h3>
+                        <p style="font-size: 0.9rem;">No strong, trustworthy, modern brand exists specifically for the new generation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="insight" class="text-center" style="background-color: #f1f1ef;">
+        <div class="container reveal">
+            <h2 class="serif">The Insight</h2>
+            <p style="font-size: 1.5rem; color: var(--text-main); font-weight: 500;">
+                Consumers don’t want more options.<br>They want <span style="border-bottom: 2px solid var(--text-main);">one brand</span> they can trust daily.
+            </p>
+        </div>
+    </section>
+
+    <section id="solution">
+        <div class="container">
+            <div class="grid grid-2">
+                <div class="img-placeholder img-portrait reveal">
+                    <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1887&auto=format&fit=crop" alt="Product Mockup">
+                </div>
+                <div style="display: flex; flex-direction: column; justify-content: center;" class="reveal">
+                    <span class="subtitle">The Solution</span>
+                    <h2>Meet Fluno.</h2>
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <h4>Brand-First Platform</h4>
+                        <p style="margin-bottom: 0;">A holistic hygiene & personal care platform.</p>
+                    </div>
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <h4>Clean & Modern</h4>
+                        <p style="margin-bottom: 0;">Focused on clean, skin-first, modern products.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Built for Routine</h4>
+                        <p style="margin-bottom: 0;">Designed for trust, aesthetics, and repeat daily use.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-we-win" style="background: white;">
+        <div class="container">
+            <h2 class="text-center reveal">Why We Win</h2>
+            <div class="grid grid-4 reveal" style="margin-top: 3rem;">
+                <div class="text-center">
+                    <h4 style="font-size: 3rem; margin-bottom: 0.5rem;">01</h4>
+                    <p>Clear mid-premium positioning</p>
+                </div>
+                <div class="text-center">
+                    <h4 style="font-size: 3rem; margin-bottom: 0.5rem;">02</h4>
+                    <p>Strong design & brand consistency</p>
+                </div>
+                <div class="text-center">
+                    <h4 style="font-size: 3rem; margin-bottom: 0.5rem;">03</h4>
+                    <p>Focus on repeat-use categories</p>
+                </div>
+                <div class="text-center">
+                    <h4 style="font-size: 3rem; margin-bottom: 0.5rem;">04</h4>
+                    <p>Fast SKU expansion + distribution</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="audience" style="padding: 0;">
+        <div class="img-placeholder img-landscape" style="height: 60vh;">
+            <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop" alt="Lifestyle">
+            <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 4rem; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); color: white;">
+                <div class="container reveal">
+                    <span class="subtitle" style="color: rgba(255,255,255,0.8);">Target Audience</span>
+                    <h2 style="margin-bottom: 0;">Modern, urban, hygiene-conscious, ingredient-aware consumers.</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="market">
+        <div class="container">
+            <div class="grid grid-2">
+                <div class="reveal">
+                    <h2>Market Opportunity</h2>
+                    <p>The numbers behind the beauty and personal care shift.</p>
+                    
+                    <div class="chart-row">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Skincare ($8.8B)</span>
+                            <strong>8.4% CAGR</strong>
+                        </div>
+                        <div class="bar-container"><div class="bar-fill" data-width="45%"></div></div>
+                    </div>
+
+                    <div class="chart-row">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Hygiene ($2.2B)</span>
+                            <strong>9.4% CAGR</strong>
+                        </div>
+                        <div class="bar-container"><div class="bar-fill" data-width="50%"></div></div>
+                    </div>
+
+                    <div class="chart-row">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Organic/Clean ($3.1B)</span>
+                            <strong>14.4% CAGR</strong>
+                        </div>
+                        <div class="bar-container"><div class="bar-fill" data-width="70%"></div></div>
+                    </div>
+
+                    <div class="chart-row">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>D2C/Online ($3.5B+)</span>
+                            <strong>20% CAGR</strong>
+                        </div>
+                        <div class="bar-container"><div class="bar-fill" data-width="95%"></div></div>
+                    </div>
+                </div>
+
+                <div class="reveal" style="background: white; padding: 2rem; border: 1px solid #eee;">
+                    <h3>BPC Market Size Growth</h3>
+                    <div class="market-growth-chart">
+                        <div class="growth-bar" data-height="60%"><span>$21.5B<br><small>2023</small></span></div>
+                        <div class="growth-bar" data-height="75%"><span>$23.9B<br><small>2024</small></span></div>
+                        <div class="growth-bar" data-height="90%"><span>$26.6B<br><small>2025</small></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="competition" class="text-center" style="background: #1a1a1a; color: white;">
+        <div class="container reveal">
+            <span class="subtitle" style="color: #999;">The Landscape</span>
+            <h2 style="color: white;">Our Position</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin: 4rem 0; position: relative;">
+                
+                <div style="position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: #444; z-index: 0;"></div>
+
+                <div style="background: #333; padding: 1rem 2rem; z-index: 1;">Cheap Mass<br><span style="font-size: 0.8rem; color: #888;">Generic, Low Trust</span></div>
+                
+                <div style="background: white; color: black; padding: 2rem 3rem; z-index: 2; border: 1px solid white;">
+                    <strong style="font-family: 'Playfair Display'; font-size: 1.5rem;">FLUNO</strong>
+                    <br><span style="font-size: 0.8rem;">Mid-Premium, Design-First, High Trust</span>
+                </div>
+
+                <div style="background: #333; padding: 1rem 2rem; z-index: 1;">Luxury<br><span style="font-size: 0.8rem; color: #888;">Expensive, Inaccessible</span></div>
+            </div>
+            <p style="color: #bbb;">We sit in the large, empty mid-premium space.</p>
+        </div>
+    </section>
+
+    <section id="strategy">
+        <div class="container">
+            <div class="grid grid-3 reveal">
+                <div class="card">
+                    <h3>Go-To-Market</h3>
+                    <ul style="padding-left: 1rem; color: var(--text-muted);">
+                        <li><strong>Phase 1:</strong> E-commerce + Quick Commerce (Blinkit, etc.)</li>
+                        <li><strong>Phase 2:</strong> Offline retail & wholesale expansion.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Business Model</h3>
+                    <ul style="padding-left: 1rem; color: var(--text-muted);">
+                        <li>Multi-category brand architecture.</li>
+                        <li>Revenue driven by high-repeat purchases.</li>
+                        <li>Omnichannel: D2C, Marketplaces, Retail.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Market Plan</h3>
+                    <ul style="padding-left: 1rem; color: var(--text-muted);">
+                        <li>Online-first brand building for trust.</li>
+                        <li>Aggressive offline expansion for volume.</li>
+                        <li>Community-led marketing.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="roadmap" style="background: white;">
+        <div class="container reveal">
+            <div class="grid grid-2">
+                <div>
+                    <h2>Roadmap</h2>
+                    <p>Executing our vision over the next 24 months.</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Month 1-6</h4>
+                        <p>Expand core SKUs. Establish brand voice.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Month 6-12</h4>
+                        <p>Add new categories: Handwash, Sunscreen, Body Wash, Face Wash.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Month 12-24</h4>
+                        <p>Scale distribution to offline retail. International shipping.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team">
+        <div class="container reveal text-center">
+            <span class="subtitle">Leadership</span>
+            <h2>The Founder</h2>
+            <div style="max-width: 400px; margin: 2rem auto;">
+                <div class="img-placeholder img-portrait" style="margin-bottom: 1.5rem;">
+                    <img src="https://placehold.co/600x800/dcdcdc/666666?text=Founder+Image" alt="Founder">
+                </div>
+                <h3 style="margin-bottom: 0.5rem;">Founder Name</h3>
+                <span style="display: block; color: var(--text-muted); margin-bottom: 1rem;">Founder & Brand Builder</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="ask" style="background-color: var(--text-main); color: white;">
+        <div class="container reveal text-center">
+            <h2 style="font-size: 3rem; margin-bottom: 2rem;">The Ask</h2>
+            <p style="color: rgba(255,255,255,0.8);">We are raising funds to fuel the next stage of growth.</p>
+            
+            <div class="grid grid-4" style="margin-top: 3rem; text-align: left;">
+                <div style="border-top: 1px solid #444; padding-top: 1rem;">
+                    <h4>Inventory</h4>
+                    <p style="font-size: 0.9rem; color: #999;">Scaling stock for quick commerce.</p>
+                </div>
+                <div style="border-top: 1px solid #444; padding-top: 1rem;">
+                    <h4>New SKUs</h4>
+                    <p style="font-size: 0.9rem; color: #999;">R&D and launch of 5 new products.</p>
+                </div>
+                <div style="border-top: 1px solid #444; padding-top: 1rem;">
+                    <h4>Marketing</h4>
+                    <p style="font-size: 0.9rem; color: #999;">Brand awareness & performance ads.</p>
+                </div>
+                <div style="border-top: 1px solid #444; padding-top: 1rem;">
+                    <h4>Team</h4>
+                    <p style="font-size: 0.9rem; color: #999;">Hiring key operational roles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="presence">
+        <div class="container text-center reveal">
+            <span class="subtitle">Presence & Platforms</span>
+            <div class="logo-grid" style="margin-top: 2rem;">
+                <div class="logo-placeholder">Amazon</div>
+                <div class="logo-placeholder">Blinkit</div>
+                <div class="logo-placeholder">Instagram</div>
+                <div class="logo-placeholder">IndiaMART</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background: white;">
+        <div class="container reveal">
+            <div class="grid grid-2">
+                <div>
+                    <h2>Let's Build Together.</h2>
+                    <p>Get in touch for investment inquiries or partnership opportunities.</p>
+                    <div style="margin-top: 2rem;">
+                        <strong>Email:</strong><br>
+                        <a href="mailto:founder@fluno.com" style="color: var(--text-main); font-size: 1.2rem;">founder@fluno.com</a>
+                    </div>
+                </div>
+                <div>
+                    <form>
+                        <input type="text" placeholder="Name">
+                        <input type="email" placeholder="Email Address">
+                        <textarea rows="4" placeholder="Message"></textarea>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 2rem 0; text-align: center; border-top: 1px solid #eee; font-size: 0.8rem; color: #999;">
+        <p>&copy; 2024 Fluno. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Trigger Chart Animations if inside the target
+                    if(entry.target.querySelector('.bar-fill')) {
+                        entry.target.querySelectorAll('.bar-fill').forEach(bar => {
+                            bar.style.width = bar.getAttribute('data-width');
+                        });
+                    }
+                    if(entry.target.querySelector('.growth-bar')) {
+                        entry.target.querySelectorAll('.growth-bar').forEach(bar => {
+                            bar.style.height = bar.getAttribute('data-height');
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
