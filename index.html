@@ -8,32 +8,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 
     <style>
-        /* ============================
-           VARIABLES & RESET
-           ============================ */
         :root {
-            /* Changed to Cream Color */
-            --bg-color: #FDFBF7; 
+            --bg-color: #FDFBF7;
             --white: #ffffff;
-            --text-main: #2c2c2c; /* Dark text for contrast against cream */
+            --text-main: #2c2c2c;
             --text-muted: #555555;
-            --accent: #BD7EFA; /* Fluno Brand Color */
+            --accent: #BD7EFA;
             --border: #e0e0e0;
             --card-bg: #ffffff;
             --transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -44,47 +34,16 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ============================
-           TYPOGRAPHY
-           ============================ */
-        h1, h2, h3, h4, .serif {
-            font-family: 'Playfair Display', serif;
-            font-weight: 400;
-        }
+        h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; font-weight: 400; }
 
-        /* Brand Specific Style */
-        .brand-font {
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 700;
-            color: var(--accent);
-        }
+        .brand-font { font-family: 'Quicksand', sans-serif; font-weight: 700; color: var(--accent); }
 
-        h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
+        h1 { font-size: clamp(3rem, 8vw, 6rem); line-height: 1.1; letter-spacing: -0.02em; }
+        h2 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1rem; letter-spacing: -0.01em; text-align: center; }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; }
 
-        h2 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 1rem;
-            letter-spacing: -0.01em;
-            text-align: center; /* Default H2 center */
-        }
+        p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem; max-width: 60ch; }
 
-        h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            max-width: 60ch;
-        }
-
-        /* Centering Subheadings Global Rule */
         .subtitle {
             text-transform: uppercase;
             letter-spacing: 0.15em;
@@ -93,30 +52,14 @@
             margin-bottom: 1rem;
             display: block;
             color: var(--text-muted);
-            text-align: center; 
+            text-align: center;
             width: 100%;
         }
 
-        /* ============================
-           UTILITIES & LAYOUT
-           ============================ */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 6rem 0; position: relative; }
 
-        section {
-            padding: 6rem 0;
-            position: relative;
-        }
-
-        .grid {
-            display: grid;
-            gap: 2rem;
-        }
-
+        .grid { display: grid; gap: 2rem; }
         .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
         .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
         .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
@@ -125,10 +68,6 @@
         .flex-center { display: flex; align-items: center; justify-content: center; }
         .mx-auto { margin-left: auto; margin-right: auto; }
 
-        /* ============================
-           COMPONENTS
-           ============================ */
-        /* Buttons */
         .btn {
             display: inline-block;
             padding: 1rem 2.5rem;
@@ -143,31 +82,18 @@
             cursor: pointer;
         }
 
-        .btn-primary {
-            background: var(--text-main);
-            color: var(--white);
-        }
+        .btn-primary { background: var(--text-main); color: var(--white); }
+        .btn-primary:hover { background: transparent; color: var(--text-main); }
 
-        .btn-primary:hover {
-            background: transparent;
-            color: var(--text-main);
-        }
-
-        /* Cards */
         .card {
             background: var(--card-bg);
             padding: 2.5rem;
             border: 1px solid rgba(0,0,0,0.05);
             transition: var(--transition);
-            border-radius: 8px; /* Slight softening */
+            border-radius: 8px;
         }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-        }
-
-        /* Images */
         .img-placeholder {
             width: 100%;
             height: 100%;
@@ -181,68 +107,30 @@
             overflow: hidden;
             border-radius: 8px;
         }
-        
-        .img-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 1.5s ease;
-        }
-
+        .img-placeholder img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.5s ease; }
         .img-portrait { aspect-ratio: 3/4; }
         .img-landscape { aspect-ratio: 16/9; }
-        
-        /* Navbar */
+
         nav {
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100%;
             padding: 1.5rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(253, 251, 247, 0.9); /* Cream semi-transparent */
+            background: rgba(253, 251, 247, 0.9);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
-        .nav-logo {
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--accent);
-            text-decoration: none;
-        }
+        .nav-logo { font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 1.5rem; color: var(--accent); text-decoration: none; }
+        .nav-link { color: var(--text-main); text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; }
 
-        .nav-link {
-            color: var(--text-main);
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.1em;
-        }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* ============================
-           ANIMATIONS
-           ============================ */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ============================
-           SECTIONS SPECIFIC
-           ============================ */
-        
-        /* Hero */
         #hero {
             height: 100vh;
             display: flex;
@@ -252,12 +140,12 @@
             text-align: center;
             position: relative;
             padding: 0 20px;
-            /* No background image, just cream color */
         }
 
-        /* Platform Buttons in Presence */
         .platform-btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             padding: 1rem 2rem;
             background: white;
             border: 1px solid #ddd;
@@ -268,44 +156,22 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        .platform-btn:hover {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-            transform: translateY(-3px);
-        }
+        .platform-btn:hover { background: var(--accent); color: white; border-color: var(--accent); transform: translateY(-3px); }
 
-        /* Coming Soon Cards */
-        .coming-soon-card {
-            text-align: center;
-        }
-        .coming-soon-card h4 {
-            margin-top: 1.5rem;
-            font-size: 1.5rem;
-        }
+        .coming-soon-card { text-align: center; }
+        .coming-soon-card h4 { margin-top: 1.5rem; font-size: 1.5rem; }
 
-        /* Timeline */
-        .timeline {
-            border-left: 1px solid var(--border);
-            padding-left: 2rem;
-            margin-left: 1rem;
-        }
-        .timeline-item {
-            position: relative;
-            padding-bottom: 3rem;
-        }
+        .timeline { border-left: 1px solid var(--border); padding-left: 2rem; margin-left: 1rem; }
+        .timeline-item { position: relative; padding-bottom: 3rem; }
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -2.35rem;
-            top: 5px;
-            width: 10px;
-            height: 10px;
+            left: -2.35rem; top: 5px;
+            width: 10px; height: 10px;
             background: var(--text-main);
             border-radius: 50%;
         }
 
-        /* Contact Form */
         input, textarea {
             width: 100%;
             padding: 1rem 0;
@@ -319,22 +185,128 @@
             transition: border 0.3s;
             color: var(--text-main);
         }
-        input:focus, textarea:focus {
-            border-bottom-color: var(--accent);
-        }
+        input:focus, textarea:focus { border-bottom-color: var(--accent); }
 
-        /* Bar Charts */
         .bar-container { width: 100%; height: 4px; background: #eee; margin-top: 10px; }
         .bar-fill { height: 100%; background: var(--text-main); width: 0; transition: width 1.5s ease-out; }
         .chart-row { margin-bottom: 1.5rem; }
 
-        /* Mobile Adjustments */
+        /* Metric cards */
+        .metric-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .metric-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .metric-value { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--text-main); margin-bottom: 0.5rem; }
+        .metric-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+        /* Horizontal timeline */
+        .h-timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; margin-top: 3rem; position: relative; }
+        .h-timeline-item { padding: 2rem; border-top: 3px solid var(--border); position: relative; }
+        .h-timeline-item.active-phase { border-top-color: var(--text-main); }
+        .h-phase-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 600; }
+        .h-phase-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.75rem; }
+
+        /* Quadrant chart */
+        .quadrant-wrap { position: relative; width: 100%; max-width: 600px; margin: 3rem auto; aspect-ratio: 1/1; }
+        .quadrant-grid {
+            position: relative;
+            width: 100%; height: 100%;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .q-axis-h { position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: var(--border); }
+        .q-axis-v { position: absolute; left: 50%; top: 0; width: 1px; height: 100%; background: var(--border); }
+        .q-label { position: absolute; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 600; }
+        .q-label.top    { top: 8px; left: 50%; transform: translateX(-50%); }
+        .q-label.bottom { bottom: 8px; left: 50%; transform: translateX(-50%); }
+        .q-label.left   { left: 8px; top: 50%; transform: translateY(-50%); writing-mode: vertical-rl; transform: translateY(-50%) rotate(180deg); }
+        .q-label.right  { right: 8px; top: 50%; writing-mode: vertical-rl; transform: translateY(-50%); }
+        .q-brand {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            font-size: 0.75rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 4px 10px;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        .q-brand.fluno-brand {
+            background: var(--text-main);
+            color: white;
+            border-color: var(--text-main);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 6px 14px;
+        }
+
+        /* Channel logos row */
+        .channel-logos { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0; }
+        .channel-logo-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            transition: var(--transition);
+            background: white;
+            min-width: 120px;
+        }
+        .channel-logo-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+        /* ======= IMAGE PLACEHOLDER NOTES ======= */
+        .img-note {
+            border: 2px dashed #BD7EFA;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: rgba(189,126,250,0.05);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Chart containers */
+        .chart-container { position: relative; width: 100%; }
+        .chart-source { font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 0.75rem; font-style: italic; }
+
+        /* Table */
+        .data-table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.95rem; }
+        .data-table th { text-align: left; padding: 0.75rem 1rem; border-bottom: 2px solid var(--text-main); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+        .data-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+        .data-table tr:last-child td { border-bottom: none; font-weight: 600; color: var(--text-main); }
+
+        /* Ask numbers */
+        .ask-numbers { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin: 3rem 0; }
+        .ask-number { text-align: center; }
+        .ask-number-value { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: white; line-height: 1; }
+        .ask-number-label { font-size: 0.8rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem; }
+
+        /* Unlocks list */
+        .unlocks-list { list-style: none; text-align: left; max-width: 600px; margin: 2rem auto 0; }
+        .unlocks-list li { padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 1rem; color: rgba(255,255,255,0.85); display: flex; gap: 0.75rem; }
+        .unlocks-list li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
         @media (max-width: 768px) {
             h1 { font-size: 3.5rem; }
             .logo-grid { gap: 1rem; }
+            .ask-numbers { gap: 1.5rem; }
+            .ask-number-value { font-size: 1.8rem; }
         }
-        
-
     </style>
 </head>
 <body>
@@ -344,14 +316,13 @@
         <a href="#contact" class="nav-link">Contact</a>
     </nav>
 
+    <!-- ===== HERO ===== -->
     <section id="hero">
         <div class="container reveal">
             <h1 class="brand-font" style="font-size: clamp(4rem, 10vw, 8rem); margin-bottom: 0;">FLUNO</h1>
-            
-            <h2 style="font-size: 1.5rem; margin-top: 0.5rem; font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-main);">Care in every drop</h2>
-            
-            <p style="margin: 2rem auto; font-size: 1.25rem;"></p>
-            
+            <h2 style="font-size: 1.5rem; margin-top: 0.5rem; font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-main);">Hygiene Is Boring. Fluno Is Not.</h2>
+            <p style="margin: 2rem auto; font-size: 1.1rem; text-align: center;">Building India's first community-first, generation-native personal care brand — for Millennials, Gen Z & Gen Alpha.</p>
+            <p style="margin: 0 auto 2rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted);">Trust. Transparency. Daily.</p>
             <div style="margin-top: 2rem;">
                 <a href="#vision" class="btn btn-primary" style="margin-right: 1rem;">View Pitch</a>
                 <a href="#contact" class="btn">Contact</a>
@@ -359,348 +330,653 @@
         </div>
     </section>
 
+    <!-- ===== VISION ===== -->
     <section id="vision" class="text-center">
         <div class="container reveal">
             <span class="subtitle">Our Vision</span>
             <p class="vision-text mx-auto" style="font-family: 'Playfair Display', serif; font-size: 1.8rem; line-height: 1.5; color: var(--text-main); max-width: 800px;">
-                “Fluno is a brand built to redefine modern skincare and hygiene for the new generation. It is not about one product, but about building a trustworthy brand that feels relevant, transparent, and modern. In a market full of conventional and forgettable brands, Fluno focuses on creating a clean, honest, and engaging experience that fits today’s lifestyle. Our goal is to build a long-term brand that people don’t just use, but actually trust and come back to.”
+                "Fluno is a brand built to redefine modern skincare and hygiene for the new generation. Not one product — a trustworthy brand that feels relevant, transparent, and modern. In a market full of conventional and forgettable brands, Fluno creates a clean, honest, and engaging experience that fits today's lifestyle. Our goal is to build a long-term brand that people don't just use, but actually trust and come back to."
             </p>
         </div>
     </section>
- <section id="coming-soon" style="background: white;">
-        <div class="container reveal">
-            <span class="subtitle">Product Line</span>
-            <h2>Coming Soon</h2>
-            <div class="grid grid-2" style="margin-top: 3rem;">
-                
-                <div class="coming-soon-card">
-                    <div class="img-placeholder" style="aspect-ratio: 1/1; margin-bottom: 1.5rem;">
-                        <img src="Gemini_Generated_Image_9uiish9uiish9uii.png" alt="Hand Wash Pouch">
-                    </div>
-                    <h4>Hand Wash Pouch</h4>
-                    <p></p>
-                </div>
 
-                <div class="coming-soon-card">
-                    <div class="img-placeholder" style="aspect-ratio: 1/1; margin-bottom: 1.5rem;">
-                        <img src="photo_2026-01-25_00-39-39.jpg" alt="Sunscreen">
-                    </div>
-                    <h4>Sunscreen</h4>
-                    <p></p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-    <section id="insight" class="text-center" style="background-color: #f1f1ef;">
-        <div class="container reveal">
-            <span class="subtitle">The Insight</span>
-            <h2 class="serif" style="text-align: center;">Simplicity Wins</h2>
-            <div style="display: flex; flex-direction: column; align-items: center;">
-                <p style="font-size: 1.5rem; color: var(--text-main); font-weight: 500; text-align: center;">
-                    Consumers don’t want more options.<br>They want<span style="border-bottom: 2px solid var(--text-main);"> A brand engages with them.</span>.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section id="problem">
+    <!-- ===== PROBLEM ===== -->
+    <section id="problem" style="background: #f1f1ef;">
         <div class="container">
             <div class="grid grid-2">
                 <div class="reveal">
                     <span class="subtitle" style="text-align: left;">The Gap</span>
-                    <h2 style="text-align: left;">The Problem</h2>
-                    <p>The hygiene market is polarized and outdated.</p>
+                    <h2 style="text-align: left;">India's Shelves Are Full.<br>Your Generation's Is Empty.</h2>
+                    <p>In a ₹30,000 Cr+ market, no brand exists for ages 20–45 that earns trust through transparency, daily relevance, and real quality. That is the gap. Fluno fills it.</p>
                 </div>
-                <div class="grid grid-2 reveal">
+                <div class="grid grid-2 reveal" style="align-content: start;">
                     <div class="card">
-                        <h3>Low Trust</h3>
-                        <p style="font-size: 0.9rem;">Market full of generic, fragrance-led, low-trust brands with questionable ingredients.</p>
+                        <h3>Old Thinking</h3>
+                        <p style="font-size: 0.9rem;">Dettol, Godrej, Santoor — built for your parents. Not one legacy brand speaks the language of the new generation.</p>
                     </div>
                     <div class="card">
-                        <h3>The Gap</h3>
-                        <p style="font-size: 0.9rem;">Huge gap between cheap mass-market products and overpriced premium luxury.</p>
+                        <h3>Trendy But Shallow</h3>
+                        <p style="font-size: 0.9rem;">Plum, Minimalist, Plix built hype, not habits. They serve a single category — not a community.</p>
                     </div>
-                      <div class="card">
-                        <h3>No Connection</h3>
-                        <p style="font-size: 0.9rem;">No strong, trustworthy, modern brand exists specifically for the new generation.</p>
+                    <div class="card">
+                        <h3>No Daily Engagement</h3>
+                        <p style="font-size: 0.9rem;">Today's consumers don't want products. They want brands that show up for them every single day.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="solution">
+    <!-- ===== INSIGHT ===== -->
+    <section id="insight" class="text-center">
+        <div class="container reveal">
+            <span class="subtitle">The Insight</span>
+            <h2 class="serif">The Most Valuable Generation Is Being Ignored.</h2>
+            <div class="grid grid-3" style="margin-top: 3rem; text-align: left;">
+                <div class="card">
+                    <h3>The Generation Gap</h3>
+                    <p style="font-size: 0.95rem;">600M+ Indians are under 35. Millennials and Gen Z control 45% of India's consumer spending. They demand authenticity — not advertising.</p>
+                </div>
+                <div class="card">
+                    <h3>The Trust Crisis</h3>
+                    <p style="font-size: 0.95rem;">72% of Gen Z consumers distrust traditional brand claims. They buy from brands they follow, not brands they see on TV.</p>
+                </div>
+                <div class="card">
+                    <h3>The Engagement Gap</h3>
+                    <p style="font-size: 0.95rem;">Quick commerce and D2C permanently changed how India buys. Brands that engage daily win. No FMCG brand has cracked community-driven daily engagement — yet.</p>
+                </div>
+            </div>
+            <p style="margin: 3rem auto 0; font-size: 1.25rem; color: var(--text-main); font-weight: 500; text-align: center;">The window is open. Fluno enters now.</p>
+        </div>
+    </section>
+
+    <!-- ===== SOLUTION ===== -->
+    <section id="solution" style="background: white;">
         <div class="container">
             <div class="grid grid-2">
                 <div class="img-placeholder img-portrait reveal">
-                    <img src="fluno care.png" alt="Fluno Product">
+                    <!-- IMAGE: Replace src below with your product image file path -->
+                    <!-- ⬇ ADD YOUR PRODUCT IMAGE HERE -->
+                    <div class="img-note" style="aspect-ratio: 3/4; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:0.5rem;">
+                        <span style="font-size: 1.5rem;">📸</span>
+                        <span>INSERT: fluno care.png</span>
+                        <span style="font-weight:400; color: #999; font-size:0.75rem;">Replace this div with:<br>&lt;img src="fluno care.png" alt="Fluno Product"&gt;</span>
+                    </div>
                 </div>
                 <div style="display: flex; flex-direction: column; justify-content: center;" class="reveal">
                     <span class="subtitle" style="text-align: left;">The Solution</span>
                     <h2 style="text-align: left;">Meet Fluno.</h2>
+                    <p>Built For The Generation That Demands More.</p>
                     <div class="card" style="margin-bottom: 1rem;">
-                        <h4>Brand-First Platform</h4>
-                        <p style="margin-bottom: 0;">A holistic hygiene & personal care platform.</p>
+                        <h4>Medical-Backed Formulations</h4>
+                        <p style="margin-bottom: 0;">Every Fluno product is co-built by an MBBS medical doctor — scientific rigor, clean formulations, real efficacy.</p>
                     </div>
                     <div class="card" style="margin-bottom: 1rem;">
-                        <h4>Clean & Modern</h4>
-                        <p style="margin-bottom: 0;">Focused on clean, skin-first, modern products.</p>
+                        <h4>Community Before Commerce</h4>
+                        <p style="margin-bottom: 0;">We don't sell products. We build habits. Trust through quality, transparency, and daily relevance.</p>
                     </div>
                     <div class="card">
-                        <h4>Built for Routine</h4>
-                        <p style="margin-bottom: 0;">Designed for trust, aesthetics, and repeat daily use.</p>
+                        <h4>Accessible Every Day</h4>
+                        <p style="margin-bottom: 0;">Premium quality. Honest price. On every platform your generation shops — quick commerce, e-commerce, and general trade.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
 
-<!-- INSERTED AFTER #solution -->
+    <!-- ===== WHY WE WIN ===== -->
+    <section id="why-we-win">
+        <div class="container reveal">
+            <span class="subtitle">Edge</span>
+            <h2>Why We Win</h2>
+            <div class="grid grid-3">
+                <div class="card">
+                    <h3>Brand First</h3>
+                    <p>Fluno is built as a lifestyle brand, not just a product seller. Category creator, not follower.</p>
+                </div>
+                <div class="card">
+                    <h3>Clean Formulations</h3>
+                    <p>Co-developed with an MBBS doctor. Skin-safe, modern, ingredient-focused. Every claim provable.</p>
+                </div>
+                <div class="card">
+                    <h3>Daily Habit Products</h3>
+                    <p>High repeat usage drives long-term customer value. Demand is already proven at 70% weekly sell-through.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="why-we-win">
-  <div class="container reveal">
-    <span class="subtitle">Edge</span>
-    <h2>Why We Win</h2>
-    <div class="grid grid-3">
-      <div class="card">
-        <h3>Brand First</h3>
-        <p>Fluno is built as a lifestyle brand, not just a product seller.</p>
-      </div>
-      <div class="card">
-        <h3>Clean Formulations</h3>
-        <p>Skin-safe, modern, ingredient-focused hygiene essentials.</p>
-      </div>
-      <div class="card">
-        <h3>Daily Habit Products</h3>
-        <p>High repeat usage drives long-term customer value.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- ===== AUDIENCE ===== -->
+    <section id="audience" style="background:#f1f1ef;">
+        <div class="container reveal">
+            <span class="subtitle">Users</span>
+            <h2>Target Audience</h2>
+            <div class="grid grid-3">
+                <div class="card">
+                    <h3>Urban Youth</h3>
+                    <p>18–35 year olds seeking clean, aesthetic, engaging brands that speak their language.</p>
+                </div>
+                <div class="card">
+                    <h3>Working Professionals</h3>
+                    <p>Daily-use hygiene customers focused on routine care, quality, and transparency.</p>
+                </div>
+                <div class="card">
+                    <h3>Modern Families</h3>
+                    <p>Safe, doctor-verified products for everyday household hygiene they can trust.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="audience" style="background:#f1f1ef;">
-  <div class="container reveal">
-    <span class="subtitle">Users</span>
-    <h2>Target Audience</h2>
-    <div class="grid grid-3">
-      <div class="card">
-        <h3>Urban Youth</h3>
-        <p>18–35 year olds seeking clean, aesthetic, Exiting brands.</p>
-      </div>
-      <div class="card">
-        <h3>Working Professionals</h3> 
-        <p>Daily-use hygiene customers focused on routine care.</p>
-      </div>
-      <div class="card">
-        <h3>Modern Families</h3>
-        <p>Safe products for everyday household hygiene.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- ===== PRODUCT LINE ===== -->
+    <section id="coming-soon" style="background: white;">
+        <div class="container reveal">
+            <span class="subtitle">Product Line</span>
+            <h2>One Category. Multiple Entry Points. All High-Margin.</h2>
+            <div class="grid grid-2" style="margin-top: 3rem;">
 
-<section id="market">
-  <div class="container reveal">
-    <span class="subtitle">Scale</span>
-    <h2>Market Opportunity</h2>
-    <p class="mx-auto text-center">
-      India’s personal care market is growing rapidly with increasing demand for
-      mid-premium brands.
-    </p>
-    <div class="grid grid-3">
-      <div class="card">
-        <h3>₹30,000 Cr+</h3>
-        <p>Indian Hygiene Market</p>
-      </div>
-      <div class="card">
-        <h3>12% CAGR</h3>
-        <p>Industry Growth Rate</p>
-      </div>
-      
-    </div>
-  </div>
-</section>
+                <!-- Live Product -->
+                <div class="coming-soon-card">
+                    <!-- ⬇ ADD YOUR HAND WASH IMAGE HERE -->
+                    <div class="img-note">📸 INSERT: Hand Wash 250ML product image<br><small style="font-weight:400; color:#999;">e.g. &lt;img src="handwash.jpg" ...&gt;</small></div>
+                    <h4>Hand Wash 250ML — Live Now</h4>
+                    <p style="font-size:0.9rem; text-align:center;">Available on:</p>
+                    <div class="channel-logos">
+                        <a href="https://blinkit.com/prn/fluno-ph-balanced-hand-wash/prid/712269?srsltid=AfmBOooijLMfKyfts2cbTdPHElt9LLIq-Avk1MdKeqtofAYuSVaphpP7" target="_blank" class="channel-logo-link">
+                            <!-- ⬇ ADD BLINKIT LOGO IMAGE HERE: replace text with <img src="blinkit.png" height="24"> -->
+                            🟡 Blinkit
+                        </a>
+                        <a href="https://www.amazon.in/Fluno-Hand-Wash-PH-balanced-moisturized/dp/B0FPRLC8HQ" target="_blank" class="channel-logo-link">
+                            <!-- ⬇ ADD AMAZON LOGO IMAGE HERE -->
+                            📦 Amazon
+                        </a>
+                        <a href="https://www.jiomart.com/product/fluno-handwash-250ml-fights-germs-ph-balanced-formula-paraben-free-gentle-on-skin-soft-and-moisturizer-hands-mlq88j-73331545" target="_blank" class="channel-logo-link">
+                            <!-- ⬇ ADD JIOMART LOGO IMAGE HERE -->
+                            🛒 JioMart
+                        </a>
+                        <a href="https://www.shopsy.in/fluno-hand-wash-bottle/p/itm8f529d6935ae6?pid=XAGHHV7NYDKBAY9U&lid=LSTXAGHHV7NYDKBAY9UYZRQ6H&marketplace=FLIPKART&q=fluno" target="_blank" class="channel-logo-link">
+                            <!-- ⬇ ADD SHOPSY LOGO IMAGE HERE -->
+                            🏪 Shopsy
+                        </a>
+                    </div>
+                </div>
 
-<section id="growth" style="background:#f1f1ef;">
-  <div class="container reveal">
-    <span class="subtitle">Traction</span>
-    <h2>Growth Projections</h2>
+                <!-- Pouch -->
+                <div class="coming-soon-card">
+                    <!-- ⬇ ADD YOUR HAND WASH POUCH IMAGE HERE -->
+                    <div class="img-note">📸 INSERT: Gemini_Generated_Image_9uiish9uiish9uii.png<br><small style="font-weight:400; color:#999;">Hand Wash Pouch 800ML</small></div>
+                    <h4>Hand Wash Pouch 800ML</h4>
+                    <p style="font-size:0.9rem; text-align:center;">Family size, multiple variants — launching 2–3 months post-funding.</p>
+                </div>
 
-    <div class="chart-row">
-      Revenue Growth
-      <div class="bar-container">
-        <div class="bar-fill" data-width="80%"></div>
-      </div>
-    </div>
+                <!-- Sunscreen -->
+                <div class="coming-soon-card">
+                    <!-- ⬇ ADD YOUR SUNSCREEN IMAGE HERE -->
+                    <div class="img-note">📸 INSERT: photo_2026-01-25_00-39-39.jpg<br><small style="font-weight:400; color:#999;">Sunscreen</small></div>
+                    <h4>Sunscreen</h4>
+                    <p style="font-size:0.9rem; text-align:center;">Launching 2–3 months post-funding.</p>
+                </div>
 
-    <div class="chart-row">
-      Distribution Expansion
-      <div class="bar-container">
-        <div class="bar-fill" data-width="70%"></div>
-      </div>
-    </div>
+                <!-- Lip Balm -->
+                <div class="coming-soon-card">
+                    <!-- ⬇ ADD LIP BALM IMAGE HERE (if available) -->
+                    <div class="img-note" style="aspect-ratio:1/1; display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;">
+                        <span style="font-size:2rem;">💄</span>
+                        <span>Lip Balm 10–15g</span>
+                    </div>
+                    <h4>Lip Balm</h4>
+                    <p style="font-size:0.9rem; text-align:center;">Multiple flavors & variants — launching 2–3 months post-funding.</p>
+                </div>
 
-    <div class="chart-row">
-      Customer Retention
-      <div class="bar-container">
-        <div class="bar-fill" data-width="85%"></div>
-      </div>
-    </div>
-  </div>
-</section>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text-muted); text-align:center; margin-top:2rem; max-width:700px; margin-left:auto; margin-right:auto;">Every SKU is selected on three criteria: high daily usage frequency, high gross margin potential, and clear generation-native relevance. As production MOQ scales 1,000 → 5,000 → 10,000 units, manufacturing cost drops and margin percentage grows.</p>
+        </div>
+    </section>
 
-<section id="roadmap">
-  <div class="container reveal">
-    <span class="subtitle">Plan</span>
-    <h2>Roadmap</h2>
+    <!-- ===== MARKET ===== -->
+    <section id="market">
+        <div class="container reveal">
+            <span class="subtitle">Scale</span>
+            <h2>A ₹30,000 Cr Market. Growing Every Year.</h2>
+            <p class="mx-auto text-center" style="text-align:center;">No brand for this generation. India's personal care market is growing rapidly — and mid-premium is wide open.</p>
 
-    <div class="timeline">
-      <div class="timeline-item">
-        <h3> Brand Launch</h3>
-        <p>E-commerce, Quick commerce.</p>
-      </div>
-      <div class="timeline-item">
-        <h3> New Products</h3>
-        <p>Launch sunscreen, refill packs, new SKUs.</p>
-      </div>
-      <div class="timeline-item">
-        <h3> Offline Expansion</h3>
-        <p>Retail partnerships and wholesale growth.</p>
-      </div>
-      <div class="timeline-item">
-        <h3> Brand Scale</h3>
-        <p>Marketing, influencers, performance ads.</p>
-      </div>
-    </div>
-  </div>
-</section>
+            <!-- Chart 1: Market Size Bar Chart -->
+            <div style="margin: 3rem 0;">
+                <h3 style="text-align:center; margin-bottom:1.5rem;">India Personal Care & Hygiene Market Size 2021–2030</h3>
+                <div class="chart-container" style="max-width:800px; margin:0 auto; height:350px;">
+                    <canvas id="marketSizeChart"></canvas>
+                </div>
+                <p class="chart-source">Source: IMARC Group, Grand View Research &nbsp;|&nbsp; 12% CAGR | 2024–2030</p>
+            </div>
 
+            <!-- TAM SAM SOM -->
+            <div style="margin: 4rem 0;">
+                <h3 style="text-align:center; margin-bottom:2rem;">TAM / SAM / SOM</h3>
+                <div class="grid grid-3">
+                    <div class="card text-center" style="border-top: 4px solid #ddd;">
+                        <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--text-muted); margin-bottom:1rem;">TAM</div>
+                        <div style="font-family:'Playfair Display', serif; font-size:2rem; margin-bottom:0.5rem;">₹30,000 Cr+</div>
+                        <p style="font-size:0.9rem;">Total India personal care + hygiene market (2024). All demographics, all categories.</p>
+                    </div>
+                    <div class="card text-center" style="border-top: 4px solid #888;">
+                        <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--text-muted); margin-bottom:1rem;">SAM</div>
+                        <div style="font-family:'Playfair Display', serif; font-size:2rem; margin-bottom:0.5rem;">₹8,500 Cr</div>
+                        <p style="font-size:0.9rem;">India personal care for ages 18–45 (Millennials, Gen Z, Gen Alpha) via modern trade and quick commerce.</p>
+                    </div>
+                    <div class="card text-center" style="border-top: 4px solid var(--text-main);">
+                        <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--text-muted); margin-bottom:1rem;">SOM</div>
+                        <div style="font-family:'Playfair Display', serif; font-size:2rem; margin-bottom:0.5rem;">₹250–500 Cr</div>
+                        <p style="font-size:0.9rem;">Fluno's realistic 3-year capture. D2C + quick commerce + GT in Tier 1 & Tier 2 cities.</p>
+                    </div>
+                </div>
+                <p class="chart-source">Source: IMARC Group, Statista India</p>
+            </div>
 
+            <!-- Chart 3: Quick Commerce Dual Line -->
+            <div style="margin: 3rem 0;">
+                <h3 style="text-align:center; margin-bottom:1.5rem;">Quick Commerce & E-Commerce Personal Care Growth in India (2021–2026)</h3>
+                <div class="chart-container" style="max-width:800px; margin:0 auto; height:320px;">
+                    <canvas id="qCommerceChart"></canvas>
+                </div>
+                <p class="chart-source">Source: Redseer Strategy Consultants, Statista India, IMARC Group &nbsp;|&nbsp; 2025–2026: Projected</p>
+            </div>
+        </div>
+    </section>
 
-
+    <!-- ===== COMPETITION / POSITION ===== -->
     <section id="competition" class="text-center" style="background: #1a1a1a; color: white;">
         <div class="container reveal">
-            <h2 style="color: white; text-align: center;">Our Position</h2>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin: 4rem 0; position: relative;">
-                
-                <div style="position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: #444; z-index: 0;"></div>
+            <h2 style="color: white; text-align: center;">Everyone Is Competing. Fluno Is Creating.</h2>
 
-                <div style="background: #333; padding: 1rem 2rem; z-index: 1;">Cheap Mass<br><span style="font-size: 0.8rem; color: #888;">Generic, Low Trust</span></div>
-                
-                <div style="background: white; color: black; padding: 2rem 3rem; z-index: 2; border: 1px solid white;">
-                    <strong style="font-family: 'Quicksand'; font-size: 1.5rem; font-weight: 700;">FLUNO</strong>
-                    <br><span style="font-size: 0.8rem;">Mid-Premium</span>
+            <!-- Quadrant Chart -->
+            <div class="quadrant-wrap reveal">
+                <div class="quadrant-grid">
+                    <div class="q-axis-h"></div>
+                    <div class="q-axis-v"></div>
+                    <div class="q-label top" style="color:#aaa;">High Community Engagement</div>
+                    <div class="q-label bottom" style="color:#aaa;">Low Community Engagement</div>
+                    <div class="q-label left" style="color:#aaa;">Traditional</div>
+                    <div class="q-label right" style="color:#aaa;">Modern / Gen-Native</div>
+
+                    <!-- Brands -->
+                    <div class="q-brand" style="left:20%; top:80%; background:#222; color:#bbb; border-color:#444;">Dettol</div>
+                    <div class="q-brand" style="left:25%; top:88%; background:#222; color:#bbb; border-color:#444;">Godrej Santoor</div>
+                    <div class="q-brand" style="left:15%; top:72%; background:#222; color:#bbb; border-color:#444;">Patanjali</div>
+                    <div class="q-brand" style="left:55%; top:38%; background:#222; color:#bbb; border-color:#444;">Plum</div>
+                    <div class="q-brand" style="left:68%; top:58%; background:#222; color:#bbb; border-color:#444;">Minimalist</div>
+                    <div class="q-brand" style="left:65%; top:42%; background:#222; color:#bbb; border-color:#444;">Plix</div>
+                    <div class="q-brand fluno-brand" style="left:85%; top:12%;">FLUNO ★</div>
                 </div>
+            </div>
 
+            <div class="grid grid-3" style="margin-top: 3rem; text-align: left;">
+                <div style="border-top: 1px solid #444; padding-top: 1.5rem;">
+                    <h4 style="color:white; margin-bottom:0.75rem;">Medical-Backed Formulations</h4>
+                    <p style="color:#bbb; font-size:0.9rem;">Every product co-developed with an MBBS doctor. No other personal care brand in this segment can claim scientific credibility at this level.</p>
+                </div>
+                <div style="border-top: 1px solid #444; padding-top: 1.5rem;">
+                    <h4 style="color:white; margin-bottom:0.75rem;">Community-First by Design</h4>
+                    <p style="color:#bbb; font-size:0.9rem;">Built FOR Gen Z and Millennials — through daily engagement, transparent ingredients, and honest communication. Not just marketed at them.</p>
+                </div>
+                <div style="border-top: 1px solid #444; padding-top: 1.5rem;">
+                    <h4 style="color:white; margin-bottom:0.75rem;">Category Creator, Not Follower</h4>
+                    <p style="color:#bbb; font-size:0.9rem;">Fluno is not competing in "hand wash." Fluno is building the Gen Z daily care lifestyle category — a space where no brand currently owns the consumer's trust.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 4rem; display: flex; justify-content: space-between; align-items: center; position: relative;">
+                <div style="position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: #444; z-index: 0;"></div>
+                <div style="background: #333; padding: 1rem 2rem; z-index: 1;">Cheap Mass<br><span style="font-size: 0.8rem; color: #888;">Generic, Low Trust</span></div>
+                <div style="background: white; color: black; padding: 2rem 3rem; z-index: 2; border: 1px solid white;">
+                    <strong style="font-family: 'Quicksand'; font-size: 1.5rem; font-weight: 700;">FLUNO</strong><br>
+                    <span style="font-size: 0.8rem;">Mid-Premium</span>
+                </div>
                 <div style="background: #333; padding: 1rem 2rem; z-index: 1;">Luxury<br><span style="font-size: 0.8rem; color: #888;">Expensive</span></div>
             </div>
-            <p style="color: #bbb; text-align: center; margin: 0 auto;">We sit in the large, empty mid-premium space.</p>
+            <p style="color: #bbb; text-align: center; margin: 1.5rem auto 0;">We sit in the large, empty mid-premium space.</p>
         </div>
     </section>
 
-    <section id="strategy">
+    <!-- ===== TRACTION ===== -->
+    <section id="traction">
+        <div class="container reveal">
+            <span class="subtitle">Traction</span>
+            <h2>Not A Pitch. Proof.</h2>
+
+            <div class="grid grid-4" style="margin: 3rem 0;">
+                <div class="metric-card">
+                    <div class="metric-value">1,000+</div>
+                    <div class="metric-label">Units Sold</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">4.0+ ★</div>
+                    <div class="metric-label">Platform Avg Rating</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">70%</div>
+                    <div class="metric-label">Weekly Sell-Through on Blinkit</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">Pan-India</div>
+                    <div class="metric-label">Geographic Reach</div>
+                </div>
+            </div>
+
+            <!-- Channel links row -->
+            <div class="channel-logos">
+                <a href="https://blinkit.com/prn/fluno-ph-balanced-hand-wash/prid/712269?srsltid=AfmBOooijLMfKyfts2cbTdPHElt9LLIq-Avk1MdKeqtofAYuSVaphpP7" target="_blank" class="channel-logo-link">
+                    <!-- ⬇ ADD BLINKIT LOGO: <img src="blinkit_logo.png" height="24" alt="Blinkit"> -->
+                    🟡 Blinkit
+                </a>
+                <a href="https://www.amazon.in/Fluno-Hand-Wash-PH-balanced-moisturized/dp/B0FPRLC8HQ" target="_blank" class="channel-logo-link">
+                    <!-- ⬇ ADD AMAZON LOGO: <img src="amazon_logo.png" height="24" alt="Amazon"> -->
+                    📦 Amazon
+                </a>
+                <a href="https://www.jiomart.com/product/fluno-handwash-250ml-fights-germs-ph-balanced-formula-paraben-free-gentle-on-skin-soft-and-moisturizer-hands-mlq88j-73331545" target="_blank" class="channel-logo-link">
+                    <!-- ⬇ ADD JIOMART LOGO: <img src="jiomart_logo.png" height="24" alt="JioMart"> -->
+                    🛒 JioMart
+                </a>
+                <a href="https://www.shopsy.in/fluno-hand-wash-bottle/p/itm8f529d6935ae6?pid=XAGHHV7NYDKBAY9U&lid=LSTXAGHHV7NYDKBAY9UYZRQ6H&marketplace=FLIPKART&q=fluno" target="_blank" class="channel-logo-link">
+                    <!-- ⬇ ADD SHOPSY LOGO: <img src="shopsy_logo.png" height="24" alt="Shopsy"> -->
+                    🏪 Shopsy
+                </a>
+            </div>
+
+            <!-- Customer testimonials -->
+            <div class="grid grid-3" style="margin-top: 3rem;">
+                <!-- ⬇ ADD REVIEW SCREENSHOT 1 -->
+                <div class="img-note" style="padding:2rem; min-height:150px; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+                    📸 INSERT: Customer Review Screenshot 1<br>
+                    <small style="font-weight:400; color:#999; margin-top:0.5rem;">Add image + link to Amazon/Blinkit review</small>
+                </div>
+                <!-- ⬇ ADD REVIEW SCREENSHOT 2 -->
+                <div class="img-note" style="padding:2rem; min-height:150px; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+                    📸 INSERT: Customer Review Screenshot 2<br>
+                    <small style="font-weight:400; color:#999; margin-top:0.5rem;">Add image + link to Amazon/Blinkit review</small>
+                </div>
+                <!-- ⬇ ADD REVIEW SCREENSHOT 3 -->
+                <div class="img-note" style="padding:2rem; min-height:150px; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+                    📸 INSERT: Customer Review Screenshot 3<br>
+                    <small style="font-weight:400; color:#999; margin-top:0.5rem;">Add image + link to Amazon/Blinkit review</small>
+                </div>
+            </div>
+
+            <blockquote style="border-left: 3px solid var(--accent); padding-left: 2rem; margin: 3rem auto; max-width: 700px; font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--text-main); font-style: italic;">
+                "Fluno is not demand-constrained. We are supply-constrained. 70% of every weekly inventory sold on Blinkit. Funding solves supply. Demand is already proven."
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- ===== BUSINESS MODEL ===== -->
+    <section id="strategy" style="background: #f1f1ef;">
         <div class="container">
             <span class="subtitle">Strategy</span>
-            <div class="grid grid-3 reveal">
+            <h2>Three Revenue Streams. One Brand. Compounding Growth.</h2>
+            <div class="grid grid-3 reveal" style="margin-top:2rem;">
                 <div class="card">
-                    <h3>Go-To-Market</h3>
-                    <ul style="padding-left: 1rem; color: var(--text-muted);">
-                        <li><strong></strong> E-commerce + Quick Commerce </li>
-                        <li><strong></strong> Offline retail & wholesale expansion.</li>
+                    <h3>Direct Sales</h3>
+                    <p style="font-size:0.85rem; margin-bottom:0.75rem; font-weight:600; color:var(--text-main);">Live Now</p>
+                    <ul style="padding-left: 1rem; color: var(--text-muted); font-size:0.9rem;">
+                        <li>E-commerce: Amazon, JioMart, Shopsy, Flipkart, Myntra, Nykaa</li>
+                        <li style="margin-top:0.5rem;">Quick commerce: Blinkit, Zepto, Instamart, BigBasket</li>
+                        <li style="margin-top:0.5rem;">General Trade: D-Mart, supermarkets, Lulu Mall</li>
+                        <li style="margin-top:0.5rem;"><strong>Margin:</strong> 15–20% online | Variable offline</li>
                     </ul>
                 </div>
                 <div class="card">
-                    <h3>Business Model</h3>
-                    <ul style="padding-left: 1rem; color: var(--text-muted);">
-                        <li>Multi-category brand architecture.</li>
-                        <li>Revenue driven by high-repeat purchases.</li>
-                        <li>Omnichannel: D2C, Marketplaces, Retail.</li>
+                    <h3>Fluno Licensing Model</h3>
+                    <p style="font-size:0.85rem; margin-bottom:0.75rem; font-weight:600; color:var(--text-main);">Months 4–8 Post-Funding</p>
+                    <ul style="padding-left: 1rem; color: var(--text-muted); font-size:0.9rem;">
+                        <li><strong>Online License:</strong> Authorized resellers list on any e-commerce platform.</li>
+                        <li style="margin-top:0.5rem;"><strong>Offline License:</strong> Territory distributor + retailer licenses with 10+ year brand agreements.</li>
+                        <li style="margin-top:0.5rem;"><strong>Revenue:</strong> License fee + % of partner's sales</li>
                     </ul>
                 </div>
                 <div class="card">
-                    <h3>Market Plan</h3>
-                    <ul style="padding-left: 1rem; color: var(--text-muted);">
-                        <li>Online-first brand building for trust.</li>
-                        <li>Aggressive offline expansion for volume.</li>
-                        <li>Community-led marketing.</li>
+                    <h3>B2B Bulk Supply</h3>
+                    <p style="font-size:0.85rem; margin-bottom:0.75rem; font-weight:600; color:var(--text-main);">Months 8–12+ Post-Funding</p>
+                    <ul style="padding-left: 1rem; color: var(--text-muted); font-size:0.9rem;">
+                        <li>Direct bulk supply to D-Mart, national supermarket chains, Lulu Mall.</li>
+                        <li style="margin-top:0.5rem;">High volume, predictable, recurring revenue.</li>
+                        <li style="margin-top:0.5rem;"><strong>Revenue:</strong> Bulk supply margin at scale</li>
                     </ul>
+                </div>
+            </div>
+            <p style="margin: 2rem auto 0; text-align:center; font-size:1.1rem; color:var(--text-main); font-style:italic; font-family:'Playfair Display', serif;">Most brands grow linearly. Fluno is built to grow exponentially — every new licensee, distributor, and B2B partner multiplies revenue without proportional capital requirement.</p>
+        </div>
+    </section>
+
+    <!-- ===== GTM ===== -->
+    <section id="gtm">
+        <div class="container reveal">
+            <span class="subtitle">Go-To-Market</span>
+            <h2>We Went Live. We Sold. Now We Scale.</h2>
+            <div class="h-timeline">
+                <div class="h-timeline-item active-phase">
+                    <div class="h-phase-label">Phase 1 — Complete ✓</div>
+                    <div class="h-phase-title">Validate</div>
+                    <p style="font-size:0.9rem;">Launched Hand Wash 250ML. 1,000+ units sold. 4.0+ star rating. 70% weekly sell-through on Blinkit. Pan-India from Day 1.</p>
+                </div>
+                <div class="h-timeline-item">
+                    <div class="h-phase-label">Months 1–4 Post-Funding</div>
+                    <div class="h-phase-title">Expand Channels</div>
+                    <p style="font-size:0.9rem;">Add Zepto, Instamart, BigBasket. Add Flipkart, Myntra, Nykaa. Enter D-Mart, supermarkets, Lulu Mall.</p>
+                </div>
+                <div class="h-timeline-item">
+                    <div class="h-phase-label">Months 4–8</div>
+                    <div class="h-phase-title">New SKUs + Licensing</div>
+                    <p style="font-size:0.9rem;">Launch Pouch 800ML + Lip Balm. Launch Online Seller License Program. Launch Offline Territory License.</p>
+                </div>
+                <div class="h-timeline-item">
+                    <div class="h-phase-label">Months 8–36</div>
+                    <div class="h-phase-title">B2B + Brand Dominance</div>
+                    <p style="font-size:0.9rem;">Direct B2B supply to chains. Scale licensing nationally. Launch SKUs 4 & 5. 40–50% repeat purchase rate.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ===== FINANCIALS ===== -->
+    <section id="growth" style="background:#f1f1ef;">
+        <div class="container reveal">
+            <span class="subtitle">Financials</span>
+            <h2>High-Margin Products. Clear Revenue Path.</h2>
+
+            <!-- SKU Table -->
+            <div style="overflow-x:auto; margin:2rem 0;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Variants</th>
+                            <th>Online Margin</th>
+                            <th>Offline Margin</th>
+                            <th>MOQ Effect</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Hand Wash 250ML</td><td>Multiple scents</td><td>15–20%</td><td>Variable</td><td>Cost ↓ as MOQ scales</td></tr>
+                        <tr><td>Hand Wash Pouch 800ML</td><td>Family variants</td><td>15–20%</td><td>Variable</td><td>Cost ↓ as MOQ scales</td></tr>
+                        <tr><td>Lip Balm 10–15g</td><td>Multiple flavors</td><td>25%+</td><td>Variable</td><td>High margin at 5,000 MOQ</td></tr>
+                        <tr><td>SKU 4 & 5</td><td>High-margin focus</td><td>20%+</td><td>Variable</td><td>Research-driven selection</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size:0.8rem; color:var(--text-muted); text-align:center; margin-top:-1rem;">Exact MRP, manufacturing cost, and per-unit economics available at the investor table.</p>
+
+            <!-- Revenue Projection Chart -->
+            <div style="margin: 3rem 0;">
+                <h3 style="text-align:center; margin-bottom:1.5rem;">3-Year Revenue Projection</h3>
+                <div class="chart-container" style="max-width:700px; margin:0 auto; height:300px;">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <p class="chart-source">Year 1: 1 SKU → 3 to 10+ channels &nbsp;|&nbsp; Year 2: 5 SKUs + licensing + B2B begins &nbsp;|&nbsp; Year 3: Full network + 10+ SKUs</p>
+            </div>
+
+            <!-- Revenue Composition Pie -->
+            <div style="margin: 3rem 0;">
+                <h3 style="text-align:center; margin-bottom:1.5rem;">Year 3 Revenue Composition</h3>
+                <div style="display:flex; gap:3rem; flex-wrap:wrap; align-items:center; justify-content:center;">
+                    <div class="chart-container" style="width:280px; height:280px;">
+                        <canvas id="revCompositionChart"></canvas>
+                    </div>
+                    <div>
+                        <div style="display:flex; flex-direction:column; gap:1rem;">
+                            <div style="display:flex; align-items:center; gap:0.75rem;"><div style="width:16px;height:16px;border-radius:3px;background:#2c2c2c;flex-shrink:0;"></div><span style="font-size:0.9rem;">Direct Sales (D2C + Retail) — 40%</span></div>
+                            <div style="display:flex; align-items:center; gap:0.75rem;"><div style="width:16px;height:16px;border-radius:3px;background:#BD7EFA;flex-shrink:0;"></div><span style="font-size:0.9rem;">Licensing Fees (Online + Offline) — 35%</span></div>
+                            <div style="display:flex; align-items:center; gap:0.75rem;"><div style="width:16px;height:16px;border-radius:3px;background:#888;flex-shrink:0;"></div><span style="font-size:0.9rem;">B2B Bulk Supply — 25%</span></div>
+                        </div>
+                        <p style="font-size:0.85rem; margin-top:1.5rem; color:var(--text-muted);">Target: 40–50% repeat purchase rate across all channels.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ROADMAP ===== -->
+    <section id="roadmap">
+        <div class="container reveal">
+            <span class="subtitle">Plan</span>
+            <h2>From One Product To A Brand India Trusts.</h2>
+            <div class="h-timeline">
+                <div class="h-timeline-item">
+                    <div class="h-phase-label">Months 1–4</div>
+                    <div class="h-phase-title">Scale & Launch Channels</div>
+                    <p style="font-size:0.9rem;">Scale Blinkit inventory (70% → full availability). Launch on Zepto, Instamart, BigBasket, Flipkart, Myntra, Nykaa. Begin D-Mart and supermarket entry.</p>
+                </div>
+                <div class="h-timeline-item">
+                    <div class="h-phase-label">Months 4–8</div>
+                    <div class="h-phase-title">New SKUs + Licensing</div>
+                    <p style="font-size:0.9rem;">Launch Pouch 800ML + Lip Balm. Launch Fluno Online Seller License. Launch Offline Territory License. Scale Hyderabad GT market.</p>
+                </div>
+                <div class="h-timeline-item">
+                    <div class="h-phase-label">Months 8–12</div>
+                    <div class="h-phase-title">B2B Contracts</div>
+                    <p style="font-size:0.9rem;">Sign direct B2B supply contracts with D-Mart, Lulu Mall, and quick commerce platforms. Launch SKU 4 & 5. Expand GT to 3–5 new cities.</p>
+                </div>
+                <div class="h-timeline-item">
+                    <div class="h-phase-label">Year 2–3</div>
+                    <div class="h-phase-title">Brand Dominance</div>
+                    <p style="font-size:0.9rem;">10+ SKUs live. Licensing network pan-India. Direct B2B at scale. Building toward the consumer trust Unilever, ITC, and Tata built over decades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TEAM ===== -->
     <section id="team" class="text-center">
         <div class="container reveal">
-            <h2>The Founders</h2>
-            
+            <h2>A Doctor And A Marketer. Two Brothers. One Brand.</h2>
             <div class="grid grid-2" style="max-width: 900px; margin: 3rem auto 0 auto;">
-                
+
                 <div>
                     <div class="img-placeholder img-portrait" style="margin-bottom: 1.5rem;">
-                        <img src="photo_2026-01-24_23-56-47.jpg" alt="Pendkar Sai Varun">
+                        <!-- ⬇ ADD FOUNDER PHOTO: replace this div with your image -->
+                        <div class="img-note" style="aspect-ratio:3/4; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:0.5rem; width:100%;">
+                            photo_2026-01-24_23-56-47.jpg <br>
+                            <small style="font-weight:400; color:#999;">Pendkar Sai Varun photo</small>
+                        </div>
                     </div>
-                    <h3 style="margin-bottom: 0.5rem;"> Pendkar Sai Varun </h3>
-                    <span style="display: block; color: var(--text-muted);">Founder</span>
+                    <h3 style="margin-bottom: 0.25rem;">Pendkar Sai Varun</h3>
+                    <span style="display: block; color: var(--text-muted); margin-bottom:1rem;">Founder</span>
+                    <p style="font-size:0.9rem; text-align:left;">B.Tech | MBA in Marketing Management — NMIMS. The strategic mind behind Fluno's brand positioning, channel expansion, and growth roadmap. Took Fluno from idea to pan-India D2C in under 12 months.</p>
+                    <blockquote style="border-left: 2px solid var(--accent); padding-left: 1rem; font-style:italic; font-size:0.9rem; color:var(--text-muted); margin-top:1rem; text-align:left;">"Great brands are not built on advertising. They are built on trust — earned one product, one experience, and one customer at a time."</blockquote>
                 </div>
 
                 <div>
                     <div class="img-placeholder img-portrait" style="margin-bottom: 1.5rem;">
-                        <img src="photo_2026-01-24_23-48-26.jpg" alt="Pendkar Sai Prasad">
+                        <!-- ⬇ ADD CO-FOUNDER PHOTO: replace this div with your image -->
+                        <div class="img-note" style="aspect-ratio:3/4; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:0.5rem; width:100%;">
+                            photo_2026-01-24_23-48-26.jpg<br>
+                            <small style="font-weight:400; color:#999;">Dr. Sai Prasad photo</small>
+                        </div>
                     </div>
-                    <h3 style="margin-bottom: 0.5rem;">Dr.Sai Prasad</h3>
-                    <span style="display: block; color: var(--text-muted);">Co-Founder</span>
+                    <h3 style="margin-bottom: 0.25rem;">Dr. Sai Prasad</h3>
+                    <span style="display: block; color: var(--text-muted); margin-bottom:1rem;">Co-Founder</span>
+                    <p style="font-size:0.9rem; text-align:left;">MBBS — Medical Doctor | Product Development & Formulation Lead. The scientific backbone of every Fluno product. In a market full of "clean" claims, Fluno has a doctor who can prove every one of them.</p>
+                    <blockquote style="border-left: 2px solid var(--accent); padding-left: 1rem; font-style:italic; font-size:0.9rem; color:var(--text-muted); margin-top:1rem; text-align:left;">"We are not in the business of making products. We are in the business of building formulations that actually work — and being fully honest about how and why."</blockquote>
                 </div>
 
             </div>
+            <p style="margin: 3rem auto 0; font-size:1.1rem; color:var(--text-main); text-align:center; max-width:700px; font-family:'Playfair Display',serif; font-style:italic;">Two brothers. Two disciplines. One mission. Build the personal care brand that India's new generation deserves — built for the next 50 years.</p>
         </div>
     </section>
 
+    <!-- ===== THE ASK ===== -->
     <section id="ask" style="background-color: var(--text-main); color: white;">
         <div class="container reveal text-center">
-            <h2 style="font-size: 3rem; margin-bottom: 1rem; color: white;">The Ask</h2>
-            <p style="color: rgba(255,255,255,0.8); text-align: center; margin: 0 auto; margin-bottom: 2rem;">
-                We are raising funds to fuel the next stage of growth.
-            </p>
-            
-            <div class="grid grid-4" style="margin-top: 3rem; text-align: left;">
-                <div style="border-top: 1px solid #444; padding-top: 1rem;">
-                    <h4 style="color: white;">Inventory</h4>
-                    <p style="font-size: 0.9rem; color: #999;">Scaling stock for quick commerce.</p>
+            <span class="subtitle" style="color:rgba(255,255,255,0.5);">The Ask</span>
+            <h2 style="color: white;">We've Validated. Now We Scale.</h2>
+
+            <div class="ask-numbers">
+                <div class="ask-number">
+                    <div class="ask-number-value">₹1 Crore</div>
+                    <div class="ask-number-label">Raising</div>
                 </div>
-                <div style="border-top: 1px solid #444; padding-top: 1rem;">
-                    <h4 style="color: white;">New SKUs</h4>
-                    <p style="font-size: 0.9rem; color: #999;">R&D and launch of 5 new products.</p>
+                <div class="ask-number">
+                    <div class="ask-number-value">9%</div>
+                    <div class="ask-number-label">Equity</div>
                 </div>
-                <div style="border-top: 1px solid #444; padding-top: 1rem;">
-                    <h4 style="color: white;">Marketing</h4>
-                    <p style="font-size: 0.9rem; color: #999;">Brand awareness & performance ads.</p>
-                </div>
-                <div style="border-top: 1px solid #444; padding-top: 1rem;">
-                    <h4 style="color: white;">Team</h4>
-                    <p style="font-size: 0.9rem; color: #999;">Hiring key operational roles.</p>
+                <div class="ask-number">
+                    <div class="ask-number-value">₹11.11 Cr</div>
+                    <div class="ask-number-label">Post-Money Valuation</div>
                 </div>
             </div>
+
+            <!-- Use of Funds Pie -->
+            <div style="display:flex; gap:3rem; flex-wrap:wrap; align-items:center; justify-content:center; margin: 3rem 0;">
+                <div class="chart-container" style="width:280px; height:280px;">
+                    <canvas id="fundsChart"></canvas>
+                </div>
+                <div style="text-align:left;">
+                    <div style="display:flex; flex-direction:column; gap:0.75rem;">
+                        <div style="display:flex; align-items:center; gap:0.75rem;"><div style="width:14px;height:14px;border-radius:3px;background:#fff;flex-shrink:0;"></div><span style="font-size:0.9rem; color:rgba(255,255,255,0.85);">Inventory & Supply Chain — ₹30L (30%)</span></div>
+                        <div style="display:flex; align-items:center; gap:0.75rem;"><div style="width:14px;height:14px;border-radius:3px;background:#BD7EFA;flex-shrink:0;"></div><span style="font-size:0.9rem; color:rgba(255,255,255,0.85);">Marketing & Brand Building — ₹20L (20%)</span></div>
+                        <div style="display:flex; align-items:center; gap:0.75rem;"><div style="width:14px;height:14px;border-radius:3px;background:#888;flex-shrink:0;"></div><span style="font-size:0.9rem; color:rgba(255,255,255,0.85);">Working Capital — ₹20L (20%)</span></div>
+                        <div style="display:flex; align-items:center; gap:0.75rem;"><div style="width:14px;height:14px;border-radius:3px;background:#aaa;flex-shrink:0;"></div><span style="font-size:0.9rem; color:rgba(255,255,255,0.85);">New SKU R&D & Launch — ₹15L (15%)</span></div>
+                        <div style="display:flex; align-items:center; gap:0.75rem;"><div style="width:14px;height:14px;border-radius:3px;background:#666;flex-shrink:0;"></div><span style="font-size:0.9rem; color:rgba(255,255,255,0.85);">Team & Operations — ₹10L (10%)</span></div>
+                        <div style="display:flex; align-items:center; gap:0.75rem;"><div style="width:14px;height:14px;border-radius:3px;background:#444;flex-shrink:0;"></div><span style="font-size:0.9rem; color:rgba(255,255,255,0.85);">Reserve & Contingency — ₹5L (5%)</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="unlocks-list">
+                <li>Solve Blinkit 70% sell-through constraint — full inventory availability</li>
+                <li>Expand from 3 to 10+ sales channels in 4 months</li>
+                <li>Launch 1 to 5 SKUs within 6 months</li>
+                <li>Build and launch Fluno's online and offline licensing model</li>
+                <li>Enter B2B bulk supply market with major retail chains</li>
+                <li>12–18 months operational runway with clear milestones at Month 4, 8, and 12</li>
+            </ul>
         </div>
     </section>
 
-    <section id="presence">
+    <!-- ===== CLOSING VISION ===== -->
+    <section id="closing" class="text-center">
+        <div class="container reveal">
+            <span class="subtitle">Vision</span>
+            <h2>We're Not Building A Hand Wash Brand.<br>We're Building The Next Unilever.</h2>
+            <p style="margin: 2rem auto; font-size:1.15rem; text-align:center; max-width:700px;">Unilever took 90 years to build trust across India. Tata took decades to make their name a promise. ITC built an empire on understanding the Indian consumer.</p>
+            <p style="margin: 0 auto 2rem; font-size:1.15rem; text-align:center; max-width:700px; color:var(--text-main); font-weight:500;">Fluno's founders are two brothers who believe the next great Indian consumer brand will not be built on legacy — but on transparency, community, daily engagement, and products that genuinely work.</p>
+            <p style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--text-main); margin:2rem auto; text-align:center;">We have the product. We have the proof. We have the team.<br>Now we need the fuel.</p>
+            <p style="font-family:'Quicksand',sans-serif; font-size:1.4rem; font-weight:700; color:var(--accent); text-align:center; margin:2rem 0;">Join Fluno. Build the future of personal care with us.</p>
+        </div>
+    </section>
+
+    <!-- ===== PRESENCE ===== -->
+    <section id="presence" style="background:#f1f1ef;">
         <div class="container text-center reveal">
             <span class="subtitle">Presence & Platforms</span>
             <h2>Where to Find Us</h2>
-            <p style="margin: 1rem auto;">Click below to visit us on our platforms.</p>
-            
+            <p style="margin: 1rem auto; text-align:center;">Click below to visit us on our platforms.</p>
             <div class="logo-grid" style="margin-top: 3rem; display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
                 <a href="https://myfluno.wixsite.com/fluno-1" target="_blank" class="platform-btn">Website</a>
                 <a href="https://www.instagram.com/myfluno?igsh=MWljZXR2MzZ4and4OA==" target="_blank" class="platform-btn">Instagram</a>
-             
             </div>
         </div>
     </section>
 
-   
-
+    <!-- ===== CONTACT ===== -->
     <section id="contact">
         <div class="container reveal">
             <div class="grid grid-2">
@@ -709,15 +985,15 @@
                     <p>Get in touch for investment inquiries or partnership opportunities.</p>
                     <div style="margin-top: 2rem;">
                         <strong>Email:</strong><br>
-                        <a href="mailto:pendkarsaivarun@gmail.com" style="color: var(--text-main); font-size: 1.1rem;">pendkarsaivarun@gmail.com</a>
+                        <a href="mailto:pendkarsaivarun@gmail.com" style="color: var(--text-main); font-size: 1.1rem;">pendkarsaivarun@gmail.com , parvarenterprise@gmail.com ,info@myfluno.com </a>
                         <br><br>
                         <strong>Phone:</strong><br>
-                        <a href="tel:+918309732876" style="color: var(--text-main); font-size: 1.1rem;">+91 83097 32876</a>
+                        <a href="tel:+918309732876" style="color: var(--text-main); font-size: 1.1rem;">+91 8309732876 +91 7995204742</a>
+                        <br><br>
+                        <strong>Pendkar Sai Varun</strong> — Founder, Fluno / Parvar Enterprises
                     </div>
                 </div>
-                <div>
-                    
-                </div>
+                <div></div>
             </div>
         </div>
     </section>
@@ -727,17 +1003,12 @@
     </footer>
 
     <script>
-        // Scroll Reveal Animation
-        const observerOptions = {
-            threshold: 0.15
-        };
-
+        // ===== SCROLL REVEAL =====
+        const observerOptions = { threshold: 0.15 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    
-                    // Trigger Chart Animations if inside the target
                     if(entry.target.querySelector('.bar-fill')) {
                         entry.target.querySelectorAll('.bar-fill').forEach(bar => {
                             bar.style.width = bar.getAttribute('data-width');
@@ -746,58 +1017,205 @@
                 }
             });
         }, observerOptions);
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
+        // ===== MOBILE FIXES =====
+        function fixMobileVH() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        fixMobileVH();
+        window.addEventListener('resize', fixMobileVH);
+        document.addEventListener('touchstart', function(){}, {passive:true});
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            let now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) event.preventDefault();
+            lastTouchEnd = now;
+        }, false);
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+            });
         });
-      
-/* ================= MOBILE OPTIMIZATION JS ================= */
+        document.querySelectorAll('.btn, .platform-btn').forEach(btn => {
+            btn.addEventListener('touchstart', () => btn.style.transform = 'scale(0.96)');
+            btn.addEventListener('touchend', () => btn.style.transform = '');
+        });
+        document.querySelectorAll('img').forEach(img => img.setAttribute('loading', 'lazy'));
 
-// Fix mobile viewport height issue (100vh bug)
-function fixMobileVH() {
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-}
-fixMobileVH();
-window.addEventListener('resize', fixMobileVH);
+        // ===== CHART.JS CHARTS =====
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#555';
 
-// Improve tap responsiveness
-document.addEventListener('touchstart', function(){}, {passive:true});
+        const accentColor = '#BD7EFA';
+        const darkColor = '#2c2c2c';
+        const projectedColor = 'rgba(189,126,250,0.45)';
 
-// Disable double-tap zoom on buttons
-let lastTouchEnd = 0;
-document.addEventListener('touchend', function (event) {
-  let now = (new Date()).getTime();
-  if (now - lastTouchEnd <= 300) {
-    event.preventDefault();
-  }
-  lastTouchEnd = now;
-}, false);
+        // Chart 1 — Market Size Bar
+        new Chart(document.getElementById('marketSizeChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2021','2022','2023','2024','2025','2026','2027','2028','2029','2030'],
+                datasets: [{
+                    label: 'Market Size (₹ Crore)',
+                    data: [18500, 20800, 23200, 26000, 29100, 32600, 36500, 40900, 45800, 51300],
+                    backgroundColor: [
+                        darkColor, darkColor, darkColor, darkColor, darkColor,
+                        projectedColor, projectedColor, projectedColor, projectedColor, projectedColor
+                    ],
+                    borderRadius: 4,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => `₹${ctx.raw.toLocaleString('en-IN')} Cr`,
+                            afterLabel: (ctx) => ctx.dataIndex >= 5 ? '(Projected)' : ''
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: { callback: v => '₹' + (v/1000).toFixed(0) + 'K Cr' },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
 
-// Smooth anchor scrolling for mobile
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href'))
-      .scrollIntoView({ behavior: 'smooth' });
-  });
-});
+        // Chart 3 — Quick Commerce Dual Line
+        new Chart(document.getElementById('qCommerceChart'), {
+            type: 'line',
+            data: {
+                labels: ['2021','2022','2023','2024','2025*','2026*'],
+                datasets: [
+                    {
+                        label: 'Quick Commerce Share of FMCG (%)',
+                        data: [2, 5, 9, 14, 20, 27],
+                        borderColor: darkColor,
+                        backgroundColor: 'rgba(44,44,44,0.08)',
+                        tension: 0.4, fill: true,
+                        pointBackgroundColor: darkColor,
+                        pointRadius: 5
+                    },
+                    {
+                        label: 'E-Commerce Personal Care Growth (%)',
+                        data: [18, 27, 38, 48, 58, 68],
+                        borderColor: accentColor,
+                        backgroundColor: 'rgba(189,126,250,0.08)',
+                        tension: 0.4, fill: true,
+                        pointBackgroundColor: accentColor,
+                        pointRadius: 5
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${ctx.raw}%` } }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: v => v + '%' },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
 
-// Add mobile active feedback
-document.querySelectorAll('.btn, .platform-btn').forEach(btn => {
-  btn.addEventListener('touchstart', () => {
-    btn.style.transform = 'scale(0.96)';
-  });
-  btn.addEventListener('touchend', () => {
-    btn.style.transform = '';
-  });
-});
+        // Chart 4 — Revenue Projection
+        new Chart(document.getElementById('revenueChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Year 1 (Post-Funding)', 'Year 2', 'Year 3'],
+                datasets: [
+                    {
+                        label: 'Low Range (₹ Lakhs)',
+                        data: [70, 140, 350],
+                        backgroundColor: 'rgba(44,44,44,0.7)',
+                        borderRadius: 4,
+                    },
+                    {
+                        label: 'High Range (₹ Lakhs)',
+                        data: [100, 200, 450],
+                        backgroundColor: accentColor,
+                        borderRadius: 4,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ₹${ctx.raw}L` } }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: v => '₹' + v + 'L' },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
 
-// Lazy-load images on mobile
-document.querySelectorAll('img').forEach(img => {
-  img.setAttribute('loading', 'lazy');
-});
+        // Chart 5 — Revenue Composition Pie
+        new Chart(document.getElementById('revCompositionChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Direct Sales', 'Licensing Fees', 'B2B Bulk Supply'],
+                datasets: [{
+                    data: [40, 35, 25],
+                    backgroundColor: [darkColor, accentColor, '#888'],
+                    borderWidth: 0,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw}%` } }
+                },
+                cutout: '55%'
+            }
+        });
 
+        // Chart 6 — Use of Funds Pie
+        new Chart(document.getElementById('fundsChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Inventory & Supply Chain', 'Marketing & Brand', 'Working Capital', 'SKU R&D & Launch', 'Team & Operations', 'Reserve'],
+                datasets: [{
+                    data: [30, 20, 20, 15, 10, 5],
+                    backgroundColor: ['#fff', accentColor, '#888', '#aaa', '#666', '#444'],
+                    borderWidth: 1,
+                    borderColor: 'rgba(255,255,255,0.2)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw}%` } }
+                },
+                cutout: '55%'
+            }
+        });
 
     </script>
 </body>
